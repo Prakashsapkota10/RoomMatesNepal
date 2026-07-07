@@ -13,6 +13,15 @@ import {
   ChevronRight,
   CheckCircle2,
   TrendingUp,
+  Moon,
+  Utensils,
+  PawPrint,
+  Wind,
+  Lock,
+  Smartphone,
+  ChevronLeft,
+  ChevronRight as ChevronRightIcon,
+  BadgeCheck,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -163,13 +172,13 @@ export default function LandingPage() {
               {/* CTA buttons */}
               <div className="flex flex-wrap gap-3">
                 <Link href="/listings">
-                  <Button size="lg" className="gap-2 rounded-xl px-6 font-semibold shadow-md shadow-primary/20 hover:shadow-lg hover:shadow-primary/25 transition-shadow">
+                  <Button size="lg" className="btn-primary-motion gap-2 rounded-xl px-6 font-semibold shadow-md shadow-primary/20 hover:shadow-lg hover:shadow-primary/25">
                     Find a Room
                     <ArrowRight className="h-4 w-4" />
                   </Button>
                 </Link>
                 <Link href="/roommates">
-                  <Button size="lg" variant="outline" className="gap-2 rounded-xl px-6 font-semibold">
+                  <Button size="lg" variant="outline" className="btn-secondary-motion gap-2 rounded-xl px-6 font-semibold">
                     Find a Roommate
                   </Button>
                 </Link>
@@ -198,11 +207,11 @@ export default function LandingPage() {
             <div className="relative flex flex-col items-center lg:items-end gap-5 lg:pl-8">
 
               {/* ── Card 1: Compatible Match ─────────────────────────── */}
-              <div className="w-full max-w-sm animate-in fade-in slide-in-from-bottom-4 duration-700 ease-out [animation-delay:200ms]">
-                <div className="group relative rounded-2xl border bg-card/90 dark:bg-card/80 backdrop-blur-sm p-5 shadow-xl shadow-black/5 dark:shadow-black/20 hover:shadow-2xl hover:shadow-primary/10 dark:hover:shadow-primary/20 transition-all duration-500 hover:-translate-y-1 overflow-hidden">
+              <div className="w-full max-w-sm animate-in fade-in slide-in-from-bottom-4 duration-300 ease-out fill-mode-both [animation-delay:150ms]">
+                <div className="card-ai-match group relative rounded-2xl border bg-card/90 dark:bg-card/80 backdrop-blur-sm p-5 shadow-xl shadow-black/5 dark:shadow-black/20 overflow-hidden cursor-default">
 
                   {/* Subtle gradient shimmer on hover */}
-                  <div className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-primary/5 via-transparent to-[color:var(--ai)]/5" />
+                  <div className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-gradient-to-br from-primary/5 via-transparent to-[color:var(--ai)]/5" />
 
                   {/* Match header */}
                   <div className="flex items-center justify-between mb-4">
@@ -287,8 +296,8 @@ export default function LandingPage() {
               </div>
 
               {/* ── Card 2: Stats (horizontal) ───────────────────────── */}
-              <div className="w-full max-w-sm animate-in fade-in slide-in-from-bottom-4 duration-700 ease-out [animation-delay:400ms]">
-                <div className="relative rounded-2xl border bg-card/90 dark:bg-card/80 backdrop-blur-sm px-5 py-4 shadow-xl shadow-black/5 dark:shadow-black/20 hover:shadow-2xl hover:shadow-primary/10 transition-all duration-500 hover:-translate-y-1 overflow-hidden">
+              <div className="w-full max-w-sm animate-in fade-in slide-in-from-bottom-4 duration-300 ease-out fill-mode-both [animation-delay:250ms]">
+                <div className="card-dashboard relative rounded-2xl border bg-card/90 dark:bg-card/80 backdrop-blur-sm px-5 py-4 shadow-xl shadow-black/5 dark:shadow-black/20 overflow-hidden cursor-default">
 
                   {/* Background accent */}
                   <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-primary/[0.03] via-transparent to-[color:var(--ai)]/[0.03]" />
@@ -321,11 +330,11 @@ export default function LandingPage() {
           </div>
 
           {/* ── Search bar (below hero columns) ────────────────────────── */}
-          <div className="mt-14 animate-in fade-in slide-in-from-bottom-4 duration-700 ease-out [animation-delay:600ms]">
+          <div className="mt-14 animate-in fade-in slide-in-from-bottom-4 duration-300 ease-out fill-mode-both [animation-delay:350ms]">
             <div className="rounded-2xl border bg-card/80 backdrop-blur-sm shadow-lg shadow-black/5 dark:shadow-black/15 p-3">
               <div className="flex flex-col sm:flex-row gap-3 items-stretch sm:items-center">
                 {/* Location */}
-                <div className="flex flex-1 items-center gap-2 rounded-xl bg-background px-3 py-2.5 border">
+                <div className="input-container flex flex-1 items-center gap-2 rounded-xl bg-background px-3 py-2.5 border">
                   <MapPin className="h-4 w-4 text-muted-foreground shrink-0" />
                   <input
                     type="text"
@@ -336,7 +345,7 @@ export default function LandingPage() {
                 </div>
 
                 {/* Category */}
-                <div className="flex items-center gap-2 rounded-xl bg-background px-3 py-2.5 border min-w-[130px]">
+                <div className="input-container flex items-center gap-2 rounded-xl bg-background px-3 py-2.5 border min-w-[130px]">
                   <Home className="h-4 w-4 text-muted-foreground shrink-0" />
                   <select className="flex-1 bg-transparent text-sm outline-none text-foreground" aria-label="Category">
                     <option value="">Any Type</option>
@@ -348,7 +357,7 @@ export default function LandingPage() {
                 </div>
 
                 {/* Budget */}
-                <div className="flex items-center gap-2 rounded-xl bg-background px-3 py-2.5 border min-w-[140px]">
+                <div className="input-container flex items-center gap-2 rounded-xl bg-background px-3 py-2.5 border min-w-[140px]">
                   <span className="text-xs font-semibold text-muted-foreground shrink-0">NPR</span>
                   <input
                     type="number"
@@ -359,7 +368,7 @@ export default function LandingPage() {
                 </div>
 
                 {/* Gender */}
-                <div className="flex items-center gap-2 rounded-xl bg-background px-3 py-2.5 border min-w-[110px]">
+                <div className="input-container flex items-center gap-2 rounded-xl bg-background px-3 py-2.5 border min-w-[110px]">
                   <Users className="h-4 w-4 text-muted-foreground shrink-0" />
                   <select className="flex-1 bg-transparent text-sm outline-none text-foreground" aria-label="Gender preference">
                     <option value="">Any</option>
@@ -370,7 +379,7 @@ export default function LandingPage() {
 
                 {/* Search button */}
                 <Link href="/listings">
-                  <Button size="default" className="gap-2 w-full sm:w-auto rounded-xl px-6 font-semibold shadow-md shadow-primary/20">
+                  <Button size="default" className="btn-primary-motion gap-2 w-full sm:w-auto rounded-xl px-6 font-semibold shadow-md shadow-primary/20">
                     <Search className="h-4 w-4" />
                     Search
                   </Button>
@@ -383,208 +392,264 @@ export default function LandingPage() {
 
 
 
-      {/* ── Popular Locations ─────────────────────────────────────────────── */}
+      {/* ── I Need a Room / I Need a Roommate ───────────────────────────── */}
+      <section className="py-12 lg:py-16">
+        <div className="container mx-auto px-4 lg:px-8">
+          <div className="grid sm:grid-cols-2 gap-5">
+            {/* I Need a Room */}
+            <Link href="/listings" className="card-listing group relative overflow-hidden rounded-2xl min-h-[220px] flex flex-col justify-end">
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/80 to-primary/60" />
+              <div className="absolute inset-0 bg-[url('/images/room-bg.jpg')] bg-cover bg-center opacity-40 transition-transform duration-500 group-hover:scale-[1.03]" />
+              <div className="relative p-6 text-white">
+                <div className="flex items-center gap-2 mb-1">
+                  <span className="text-2xl">🏠</span>
+                  <h2 className="text-xl font-bold">I Need a Room</h2>
+                </div>
+                <p className="text-sm text-white/80 mb-4">Browse thousands of verified rooms across Nepal's major cities.</p>
+                <Button size="sm" className="btn-primary-motion bg-white text-primary hover:bg-white/90 font-semibold rounded-lg px-4">
+                  Explore Rooms
+                </Button>
+              </div>
+            </Link>
+
+            {/* I Need a Roommate */}
+            <Link href="/roommates" className="card-listing group relative overflow-hidden rounded-2xl min-h-[220px] flex flex-col justify-end">
+              <div className="absolute inset-0 bg-gradient-to-br from-[color:var(--community)]/80 to-[color:var(--community)]/60" />
+              <div className="absolute inset-0 bg-[url('/images/roommates-bg.jpg')] bg-cover bg-center opacity-40 transition-transform duration-500 group-hover:scale-[1.03]" />
+              <div className="relative p-6 text-white">
+                <div className="flex items-center gap-2 mb-1">
+                  <span className="text-2xl">🤝</span>
+                  <h2 className="text-xl font-bold">I Need a Roommate</h2>
+                </div>
+                <p className="text-sm text-white/80 mb-4">Find someone who shares your lifestyle, budget, and vibes.</p>
+                <Button size="sm" className="btn-primary-motion bg-white text-[color:var(--community)] hover:bg-white/90 font-semibold rounded-lg px-4">
+                  Find Partners
+                </Button>
+              </div>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ── AI Smart Matching ─────────────────────────────────────────────── */}
+      <section className="py-16 lg:py-24 bg-muted/30">
+        <div className="container mx-auto px-4 lg:px-8">
+          {/* Header */}
+          <div className="text-center mb-12">
+            <span className="inline-block rounded-full border border-[color:var(--ai)]/40 bg-[color:var(--ai-light)] px-3 py-1 text-xs font-semibold text-[color:var(--ai-dark)] mb-3 tracking-wide">
+              SMART MATCHING
+            </span>
+            <h2 className="text-3xl lg:text-4xl font-bold mb-3">AI Finds Roommates That Match Your Lifestyle</h2>
+            <p className="text-muted-foreground max-w-xl mx-auto leading-relaxed">
+              Our advanced algorithm analyzes <span className="text-primary font-medium">20+ lifestyle factors</span> to find you a roommate you'll actually get along with.
+            </p>
+          </div>
+
+          <div className="grid lg:grid-cols-2 gap-8 items-start">
+            {/* Left: lifestyle factor cards */}
+            <div className="grid grid-cols-2 gap-4">
+              {[
+                { icon: Moon,     title: "Sleep Schedule",  desc: "Early birds or night owls — we've got you matched.",          color: "var(--primary)"   },
+                { icon: Utensils, title: "Dietary Habits",  desc: "Vegetarian? Love to cook? Shared meals or solo vibes.",        color: "var(--ai)"        },
+                { icon: PawPrint, title: "Pet Friendly",    desc: "Animal lovers or allergy-safe zones, strictly filtered.",      color: "var(--success)"   },
+                { icon: Wind,     title: "Cleanliness",     desc: "Set your expectations for shared spaces and cleaning days.",    color: "var(--trust)"     },
+              ].map(({ icon: Icon, title, desc, color }) => (
+                <div key={title} className="card-dashboard rounded-2xl border bg-card p-5">
+                  <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl" style={{ backgroundColor: `color-mix(in srgb, ${color} 12%, transparent)` }}>
+                    <Icon className="h-5 w-5" style={{ color }} />
+                  </div>
+                  <h3 className="font-semibold text-sm mb-1">{title}</h3>
+                  <p className="text-xs text-muted-foreground leading-relaxed">{desc}</p>
+                </div>
+              ))}
+            </div>
+
+            {/* Right: Compatibility score card */}
+            <div className="card-dashboard rounded-2xl border bg-card p-6 shadow-lg">
+              <h3 className="text-lg font-bold mb-5">Compatibility Score</h3>
+              <div className="flex flex-col gap-5">
+                {[
+                  { label: "Vibe Match",       pct: 98, color: "var(--primary)" },
+                  { label: "Budget Alignment", pct: 85, color: "var(--primary)" },
+                ].map(({ label, pct, color }) => (
+                  <div key={label}>
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-sm font-medium">{label}</span>
+                      <span className="text-sm font-bold" style={{ color }}>{pct}%</span>
+                    </div>
+                    <div className="h-2.5 w-full rounded-full bg-muted overflow-hidden">
+                      <div
+                        className="h-full rounded-full transition-all duration-700 ease-out"
+                        style={{ width: `${pct}%`, backgroundColor: color }}
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <blockquote className="mt-6 rounded-xl bg-muted/50 px-4 py-3 text-sm text-muted-foreground italic border-l-2 border-primary">
+                "It's like they read my mind. Found the perfect roommate in 3 days!"
+              </blockquote>
+              <Link href="/matches" className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-primary hover:underline underline-offset-4">
+                See how AI works <ArrowRight className="h-3.5 w-3.5" />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Featured Roommates ────────────────────────────────────────────── */}
       <section className="py-16 lg:py-20">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="flex items-end justify-between mb-8">
             <div>
-              <h2 className="text-2xl lg:text-3xl font-bold">Popular Locations</h2>
-              <p className="text-muted-foreground mt-1">
-                Browse rooms in Nepal's most in-demand neighbourhoods
-              </p>
+              <h2 className="text-2xl lg:text-3xl font-bold">Featured Roommates</h2>
+              <p className="text-muted-foreground mt-1">Top-rated profiles looking for a home.</p>
             </div>
-            <Link href="/listings" className="hidden sm:flex items-center gap-1 text-sm text-primary hover:underline">
-              View all <ChevronRight className="h-4 w-4" />
-            </Link>
+            <div className="flex items-center gap-2">
+              <button aria-label="Previous" className="flex h-8 w-8 items-center justify-center rounded-full border bg-card btn-secondary-motion hover:border-primary hover:text-primary transition-colors duration-150">
+                <ChevronLeft className="h-4 w-4" />
+              </button>
+              <button aria-label="Next" className="flex h-8 w-8 items-center justify-center rounded-full border bg-card btn-secondary-motion hover:border-primary hover:text-primary transition-colors duration-150">
+                <ChevronRightIcon className="h-4 w-4" />
+              </button>
+            </div>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
-            {POPULAR_LOCATIONS.map((loc) => (
-              <Link
-                key={loc.slug}
-                href={`/listings?location=${loc.slug}`}
-                className="group rounded-xl border bg-card p-4 text-center hover:border-primary hover:shadow-sm transition-all"
-              >
-                <MapPin className="h-6 w-6 mx-auto text-muted-foreground group-hover:text-primary transition-colors" />
-                <p className="mt-2 text-sm font-medium leading-tight">{loc.name}</p>
-                <p className="text-xs text-muted-foreground mt-1">
-                  {loc.listingCount} listings
-                </p>
-              </Link>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {[
+              { name: "Sagar K., 24",  role: "Medical Student at TUTH", budget: 8000,  tags: ["Non-Smoker", "Gym Freak"], topMatch: true  },
+              { name: "Nikita R., 22", role: "Graphic Designer",         budget: 12000, tags: ["Art Lover", "Quiet"],      topMatch: false },
+              { name: "Arun M., 26",   role: "Software Engineer",        budget: 15000, tags: ["Early Bird", "Clean"],     topMatch: false },
+              { name: "Priya S., 23",  role: "MBA Student",              budget: 10000, tags: ["Vegetarian", "Neat"],      topMatch: false },
+            ].map((person) => (
+              <div key={person.name} className="card-listing group rounded-2xl border bg-card overflow-hidden">
+                {/* Photo placeholder */}
+                <div className="relative h-44 bg-gradient-to-br from-muted to-muted/60 flex items-center justify-center overflow-hidden">
+                  <Users className="h-16 w-16 text-muted-foreground/40" />
+                  {person.topMatch && (
+                    <span className="absolute top-3 left-3 rounded-full bg-[color:var(--ai)] px-2.5 py-0.5 text-[11px] font-bold text-white shadow">
+                      Top Match
+                    </span>
+                  )}
+                </div>
+                <div className="p-4">
+                  <p className="font-semibold text-sm">{person.name}</p>
+                  <p className="text-xs text-muted-foreground mt-0.5 mb-3">{person.role}</p>
+                  <div className="flex flex-wrap gap-1.5 mb-4">
+                    {person.tags.map((tag) => (
+                      <span key={tag} className="rounded-full border border-border bg-muted px-2.5 py-0.5 text-[11px] font-medium text-muted-foreground">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm font-bold text-primary">NPR {person.budget.toLocaleString()}/mo</span>
+                    <button aria-label="Message" className="btn-primary-motion flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground shadow-sm">
+                      <MessageSquare className="h-4 w-4" />
+                    </button>
+                  </div>
+                </div>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── Featured Listings ─────────────────────────────────────────────── */}
+      {/* ── Premium Rooms ─────────────────────────────────────────────────── */}
       <section className="py-16 lg:py-20 bg-muted/20">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="flex items-end justify-between mb-8">
             <div>
-              <h2 className="text-2xl lg:text-3xl font-bold">Featured Listings</h2>
-              <p className="text-muted-foreground mt-1">
-                Hand-picked verified rooms across Nepal
-              </p>
+              <h2 className="text-2xl lg:text-3xl font-bold">Premium Rooms</h2>
+              <p className="text-muted-foreground mt-1">Verified listings in prime locations.</p>
             </div>
-            <Link href="/listings" className="hidden sm:flex items-center gap-1 text-sm text-primary hover:underline">
-              View all <ChevronRight className="h-4 w-4" />
+            <Link href="/listings" className="hidden sm:flex items-center gap-1 text-sm font-medium text-primary hover:underline underline-offset-4">
+              View All <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {FEATURED_LISTINGS.map((listing) => (
-              <Link key={listing.id} href={`/listings/${listing.id}`}>
-                <Card className="group hover:shadow-md transition-shadow overflow-hidden">
-                  <div className="h-40 bg-muted flex items-center justify-center">
-                    <Home className="h-12 w-12 text-muted-foreground" />
-                  </div>
-                  <CardContent className="p-4">
-                    <Badge variant="secondary" className="mb-2 text-xs">
-                      {listing.type}
-                    </Badge>
-                    <h3 className="font-semibold leading-snug group-hover:text-primary transition-colors">
-                      {listing.title}
-                    </h3>
-                    <p className="text-xs text-muted-foreground mt-1 flex items-center gap-1">
-                      <MapPin className="h-3 w-3" /> {listing.location}
-                    </p>
-                    <div className="flex items-center justify-between mt-3">
-                      <span className="font-bold text-sm">
-                        NPR {listing.price.toLocaleString()}
-                        <span className="font-normal text-muted-foreground text-xs">/mo</span>
-                      </span>
-                      <div className="flex gap-1">
-                        {listing.badges.map((b) => (
-                          <Badge key={b} variant="outline" className="text-xs px-1.5 py-0">
-                            {b}
-                          </Badge>
-                        ))}
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {[
+              { title: "Luxury Apartment, Lazimpat", price: 15000, badge: "Verified",  badgeColor: "var(--primary)",  bg: "from-primary/40"    },
+              { title: "Modern Studio, Thamel",      price: 25000, badge: "Trending",  badgeColor: "var(--warning)",  bg: "from-warning/40"    },
+              { title: "Cozy Room, Chabahil",        price: 7500,  badge: "Verified",  badgeColor: "var(--primary)",  bg: "from-primary/40"    },
+            ].map((room) => (
+              <Link key={room.title} href="/listings" className="card-listing group relative rounded-2xl overflow-hidden min-h-[200px] flex items-end">
+                <div className={`absolute inset-0 bg-gradient-to-t ${room.bg} to-muted/60`} />
+                <div className="absolute inset-0 bg-muted flex items-center justify-center">
+                  <Home className="h-16 w-16 text-muted-foreground/30" />
+                </div>
+                {/* Badge */}
+                <span
+                  className="absolute top-3 left-3 rounded-full px-2.5 py-0.5 text-[11px] font-bold text-white shadow"
+                  style={{ backgroundColor: room.badgeColor }}
+                >
+                  {room.badge}
+                </span>
+                {/* Price pill */}
+                <div className="relative m-3 rounded-xl bg-background/95 backdrop-blur-sm px-3 py-2 shadow">
+                  <span className="text-sm font-bold">NPR {room.price.toLocaleString()}</span>
+                </div>
               </Link>
             ))}
           </div>
         </div>
       </section>
-
-      {/* ── AI Matching Introduction ──────────────────────────────────────── */}
-      <section className="py-16 lg:py-24">
-        <div className="container mx-auto px-4 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            {/* Illustration placeholder */}
-            <div className="rounded-2xl border bg-gradient-to-br from-primary/5 to-primary/10 p-8 flex items-center justify-center min-h-64">
-              <div className="text-center">
-                <div className="inline-flex h-20 w-20 items-center justify-center rounded-2xl bg-primary/10 mb-4">
-                  <Sparkles className="h-10 w-10 text-primary" />
+      {/* ── Safety Section ────────────────────────────────────────────────── */}
+      <section className="py-16 lg:py-20 bg-primary text-primary-foreground">
+        <div className="container mx-auto px-4 lg:px-8 text-center">
+          <h2 className="text-2xl lg:text-3xl font-bold mb-2">Your Safety is Our Priority</h2>
+          <p className="text-primary-foreground/75 mb-12 max-w-lg mx-auto text-sm">
+            We've built a community based on trust, verification, and real human interactions.
+          </p>
+          <div className="grid sm:grid-cols-3 gap-8 max-w-3xl mx-auto">
+            {[
+              { icon: Shield,      title: "Identity Verification", desc: "Mandatory Citizenship or Student ID verification for all premium users." },
+              { icon: Star,        title: "Trust Score",           desc: "Advanced rating system based on past roommate experiences and reviews."  },
+              { icon: Lock,        title: "Secure Messaging",      desc: "Chat without sharing personal numbers until you're ready to meet."       },
+            ].map(({ icon: Icon, title, desc }) => (
+              <div key={title} className="flex flex-col items-center gap-3">
+                <div className="flex h-14 w-14 items-center justify-center rounded-full bg-primary-foreground/10 border border-primary-foreground/20">
+                  <Icon className="h-6 w-6 text-primary-foreground" />
                 </div>
-                <div className="flex flex-col gap-2 text-sm text-muted-foreground">
-                  {["Sleep Schedule", "Cleanliness", "Noise Tolerance", "Guest Policy"].map((f) => (
-                    <div key={f} className="flex items-center gap-2 rounded-lg bg-background/80 px-3 py-1.5">
-                      <div className="h-2 flex-1 rounded-full bg-muted overflow-hidden">
-                        <div className="h-full rounded-full bg-primary" style={{ width: `${Math.random() * 60 + 40}%` }} />
-                      </div>
-                      <span className="text-xs">{f}</span>
-                    </div>
-                  ))}
-                </div>
+                <h3 className="font-bold text-sm">{title}</h3>
+                <p className="text-xs text-primary-foreground/70 leading-relaxed">{desc}</p>
               </div>
-            </div>
-
-            <div className="flex flex-col gap-6">
-              <Badge variant="secondary" className="w-fit gap-1.5">
-                <Sparkles className="h-3.5 w-3.5" />
-                AI Matching Engine
-              </Badge>
-              <h2 className="text-3xl lg:text-4xl font-bold leading-tight">
-                Find a roommate you'll actually get along with
-              </h2>
-              <p className="text-muted-foreground text-lg leading-relaxed">
-                Our AI analyses 20+ lifestyle factors — from sleep schedules to
-                cooking habits — and computes a real compatibility score between
-                you and potential roommates. No more awkward surprises.
-              </p>
-              <ul className="flex flex-col gap-3">
-                {[
-                  "20+ lifestyle compatibility factors",
-                  "Detailed match report with reasons",
-                  "Side-by-side preference comparison",
-                  "Continuously improves as you use it",
-                ].map((feat) => (
-                  <li key={feat} className="flex items-center gap-3 text-sm">
-                    <div className="h-5 w-5 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-                      <Star className="h-3 w-3 text-primary" />
-                    </div>
-                    {feat}
-                  </li>
-                ))}
-              </ul>
-              <div className="flex gap-3">
-                <Link href="/register">
-                  <Button className="gap-2">
-                    Try AI Matching
-                    <Sparkles className="h-4 w-4" />
-                  </Button>
-                </Link>
-                <Link href="/about">
-                  <Button variant="outline">Learn More</Button>
-                </Link>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* ── How It Works ─────────────────────────────────────────────────── */}
-      <section className="py-16 lg:py-20 bg-muted/20">
+      {/* ── How RoomMate Nepal Works ──────────────────────────────────────── */}
+      <section className="py-16 lg:py-20">
         <div className="container mx-auto px-4 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-2xl lg:text-3xl font-bold">How It Works</h2>
-            <p className="text-muted-foreground mt-2">
-              Find your perfect room in 3 simple steps
-            </p>
-          </div>
-          <div className="grid sm:grid-cols-3 gap-8">
-            {[
-              {
-                step: "01",
-                icon: Users,
-                title: "Create Your Profile",
-                desc: "Fill out your lifestyle preferences, budget, and move-in timeline to get the most accurate matches.",
-              },
-              {
-                step: "02",
-                icon: Sparkles,
-                title: "Get AI Matches",
-                desc: "Our AI scans thousands of listings and roommate profiles to find your top compatibility matches.",
-              },
-              {
-                step: "03",
-                icon: MessageSquare,
-                title: "Connect & Move In",
-                desc: "Chat with matches, schedule viewings, apply directly, and confirm with confidence.",
-              },
-            ].map(({ step, icon: Icon, title, desc }) => (
-              <div key={step} className="flex flex-col items-center text-center gap-4">
-                <div className="relative">
-                  <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10">
-                    <Icon className="h-8 w-8 text-primary" />
+          <h2 className="text-2xl lg:text-3xl font-bold text-center mb-14">How RoomMate Nepal Works</h2>
+          <div className="relative">
+            <div className="absolute top-8 left-0 right-0 h-px bg-border hidden sm:block" aria-hidden />
+            <div className="grid sm:grid-cols-4 gap-8 text-center">
+              {[
+                { n: 1, title: "Create Profile", desc: "Tell us about your lifestyle and budget preferences.",                             active: false },
+                { n: 2, title: "Get Matched",    desc: "AI suggests roommates with similar lifestyles and locations.",                     active: false },
+                { n: 3, title: "Secure Chat",    desc: "Message potential roommates through our encrypted app platform.",                 active: false },
+                { n: 4, title: "Move In",        desc: "Finalize details, sign agreements, and move into your new home.",                 active: true  },
+              ].map(({ n, title, desc, active }) => (
+                <div key={n} className="flex flex-col items-center gap-3">
+                  <div className={`relative z-10 flex h-16 w-16 items-center justify-center rounded-full border-2 text-lg font-bold transition-colors duration-200 ${
+                    active ? "bg-primary border-primary text-primary-foreground shadow-lg shadow-primary/25" : "bg-background border-primary text-primary"
+                  }`}>
+                    {n}
                   </div>
-                  <span className="absolute -top-2 -right-2 flex h-6 w-6 items-center justify-center rounded-full bg-primary text-primary-foreground text-xs font-bold">
-                    {step}
-                  </span>
+                  <h3 className="font-bold text-sm">{title}</h3>
+                  <p className="text-xs text-muted-foreground leading-relaxed max-w-[140px]">{desc}</p>
                 </div>
-                <h3 className="font-semibold text-lg">{title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">{desc}</p>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
       {/* ── Testimonials ─────────────────────────────────────────────────── */}
-      <section className="py-16 lg:py-20">
+      <section className="py-16 lg:py-20 bg-muted/20">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="text-center mb-10">
             <h2 className="text-2xl lg:text-3xl font-bold">What People Are Saying</h2>
@@ -594,7 +659,7 @@ export default function LandingPage() {
           </div>
           <div className="grid sm:grid-cols-3 gap-6">
             {TESTIMONIALS.map((t) => (
-              <Card key={t.name}>
+              <Card key={t.name} className="card-dashboard">
                 <CardContent className="p-6 flex flex-col gap-4">
                   <div className="flex gap-0.5">
                     {Array.from({ length: t.rating }).map((_, i) => (
@@ -631,7 +696,10 @@ export default function LandingPage() {
             {SUBSCRIPTION_PLANS.map((plan) => (
               <Card
                 key={plan.id}
-                className={plan.highlighted ? "ring-2 ring-primary" : ""}
+                className={plan.highlighted
+                  ? "card-ai-match ring-2 ring-primary"
+                  : "card-listing"
+                }
               >
                 <CardContent className="p-5 flex flex-col gap-4">
                   {plan.highlighted && (
@@ -694,35 +762,76 @@ export default function LandingPage() {
         </div>
       </section>
 
+      {/* ── App Download ──────────────────────────────────────────────────── */}
+      <section className="py-16 lg:py-20 bg-muted/20">
+        <div className="container mx-auto px-4 lg:px-8">
+          <div className="rounded-2xl border bg-card shadow-sm overflow-hidden">
+            <div className="grid lg:grid-cols-2 gap-0 items-center">
+              {/* Left */}
+              <div className="p-8 lg:p-12">
+                <h2 className="text-2xl lg:text-3xl font-bold mb-1">
+                  {APP_NAME} App
+                </h2>
+                <h3 className="text-xl font-bold text-primary mb-4">Coming Soon</h3>
+                <p className="text-muted-foreground text-sm leading-relaxed mb-8 max-w-sm">
+                  Get real-time alerts, browse rooms on the go, and manage your roommate search directly from your smartphone.
+                </p>
+                <div className="flex flex-wrap gap-3">
+                  <button className="btn-secondary-motion inline-flex items-center gap-3 rounded-xl bg-foreground text-background px-5 py-3 text-sm font-medium">
+                    <Smartphone className="h-5 w-5" />
+                    <div className="text-left">
+                      <div className="text-[10px] opacity-70 leading-none">GET IT ON</div>
+                      <div className="font-bold text-sm leading-tight">Google Play</div>
+                    </div>
+                  </button>
+                  <button className="btn-secondary-motion inline-flex items-center gap-3 rounded-xl bg-foreground text-background px-5 py-3 text-sm font-medium">
+                    <Smartphone className="h-5 w-5" />
+                    <div className="text-left">
+                      <div className="text-[10px] opacity-70 leading-none">DOWNLOAD ON</div>
+                      <div className="font-bold text-sm leading-tight">App Store</div>
+                    </div>
+                  </button>
+                </div>
+              </div>
+              {/* Right: phone mockup */}
+              <div className="flex items-center justify-center bg-muted/30 py-10 lg:py-0 min-h-[260px]">
+                <div className="relative w-32 h-56 rounded-[2rem] border-4 border-foreground/20 bg-background shadow-2xl flex flex-col overflow-hidden">
+                  <div className="h-6 bg-muted/60 flex items-center justify-center gap-1 px-3">
+                    <div className="h-2 w-2 rounded-full bg-muted-foreground/30" />
+                    <div className="h-1.5 flex-1 rounded-full bg-muted-foreground/20" />
+                  </div>
+                  <div className="flex-1 p-2 flex flex-col gap-1.5">
+                    <div className="h-16 rounded-lg bg-muted/60" />
+                    <div className="h-2 w-3/4 rounded bg-muted/40" />
+                    <div className="h-2 w-1/2 rounded bg-muted/30" />
+                    <div className="h-2 w-2/3 rounded bg-muted/30 mt-1" />
+                    <div className="h-2 w-1/2 rounded bg-muted/30" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ── CTA ──────────────────────────────────────────────────────────── */}
       <section className="py-16 lg:py-24 bg-primary text-primary-foreground">
         <div className="container mx-auto px-4 lg:px-8 text-center">
-          <Sparkles className="h-12 w-12 mx-auto mb-4 opacity-80" />
-          <h2 className="text-3xl lg:text-4xl font-bold mb-4">
-            Ready to find your perfect roommate?
+          <h2 className="text-3xl lg:text-4xl font-bold mb-3">
+            Ready to Find Your Perfect Roommate?
           </h2>
-          <p className="text-primary-foreground/80 text-lg mb-8 max-w-xl mx-auto">
-            Join 10,000+ people across Nepal who found their ideal living
-            situation through {APP_NAME}.
+          <p className="text-primary-foreground/80 text-base mb-8 max-w-md mx-auto leading-relaxed">
+            Join the largest community of room hunters in Nepal and start your stress-free living journey today.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/register">
-              <Button
-                size="lg"
-                variant="secondary"
-                className="gap-2 min-w-40"
-              >
-                Get Started Free
-                <ArrowRight className="h-4 w-4" />
+              <Button size="lg" variant="secondary" className="btn-primary-motion min-w-44 rounded-xl font-semibold">
+                Create Free Account
               </Button>
             </Link>
-            <Link href="/listings">
-              <Button
-                size="lg"
-                variant="outline"
-                className="gap-2 min-w-40 border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10"
-              >
-                Browse Rooms
+            <Link href="/contact">
+              <Button size="lg" variant="outline" className="btn-secondary-motion min-w-44 rounded-xl border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 font-semibold">
+                Contact Support
               </Button>
             </Link>
           </div>

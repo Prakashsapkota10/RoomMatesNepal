@@ -62,23 +62,30 @@ export function TopNav({
   return (
     <header
       className={cn(
-        "fixed top-0 z-50 w-full transition-all duration-500 ease-[cubic-bezier(0.25,0.46,0.45,0.94)]",
-        // Apple-style: transparent at top, frosted glass on scroll
-        scrolled
-          ? "bg-background/80 dark:bg-background/75 backdrop-blur-xl shadow-[0_1px_0_0_hsl(var(--border))]"
-          : "bg-transparent",
-        // Hide/show on scroll direction
+        // Base: hide/show on scroll direction — use spec page-transition timing (300ms)
+        "fixed top-0 z-50 w-full",
+        "transition-transform duration-300 ease-[cubic-bezier(0.25,0.46,0.45,0.94)]",
         visible ? "translate-y-0" : "-translate-y-full",
-        mobileOpen && "bg-background/95 backdrop-blur-xl"
       )}
     >
-      <div className="container mx-auto flex h-14 items-center justify-between px-4 lg:px-8">
+      {/* Separate backdrop layer so blur/border animate independently at 200ms */}
+      <div
+        className={cn(
+          "absolute inset-0 transition-all duration-200 ease-[cubic-bezier(0.25,0.46,0.45,0.94)]",
+          scrolled
+            ? "bg-background/80 dark:bg-background/75 backdrop-blur-xl shadow-[0_1px_0_0_var(--border)]"
+            : "bg-transparent backdrop-blur-none shadow-none",
+          mobileOpen && "bg-background/95 backdrop-blur-xl"
+        )}
+        aria-hidden
+      />
+      <div className="relative z-10 container mx-auto flex h-14 items-center justify-between px-4 lg:px-8">
         {/* ── Logo ─────────────────────────────────────────────────────── */}
         <Link
           href="/"
           className="flex items-center gap-2 font-bold text-lg shrink-0 group"
         >
-          <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-primary text-primary-foreground transition-transform duration-200 group-hover:scale-110">
+          <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-primary text-primary-foreground transition-transform duration-150 group-hover:scale-110">
             <Sparkles className="h-3.5 w-3.5" />
           </div>
           <span
@@ -100,17 +107,14 @@ export function TopNav({
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "relative px-3 py-1.5 text-sm font-medium rounded-md transition-colors duration-200",
-                  "hover:text-foreground",
-                  active
-                    ? "text-foreground"
-                    : "text-muted-foreground hover:text-foreground"
+                  "nav-link relative px-3 py-1.5 text-sm font-medium rounded-md",
+                  active ? "text-foreground" : "text-muted-foreground hover:text-foreground"
                 )}
               >
                 {item.label}
                 {/* Active underline indicator */}
                 {active && (
-                  <span className="absolute bottom-0 left-3 right-3 h-0.5 rounded-full bg-primary animate-in fade-in slide-in-from-bottom-1 duration-200" />
+                  <span className="absolute bottom-0 left-3 right-3 h-0.5 rounded-full bg-primary animate-in fade-in slide-in-from-bottom-1 duration-150" />
                 )}
               </Link>
             );
