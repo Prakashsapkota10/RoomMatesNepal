@@ -1,4 +1,4 @@
-import { TopNav } from "@/components/navigation/top-nav";
+import { TopNav } from "@/components/navigation/public-nav";
 import { PublicFooter } from "@/components/navigation/public-footer";
 import { getOptionalSession } from "@/lib/dal";
 
