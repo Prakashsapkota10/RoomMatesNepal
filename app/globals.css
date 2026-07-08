@@ -404,4 +404,56 @@
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
   }
+
+  /* ── SVG circle ring draw (for compatibility score rings) ─────────── */
+  @keyframes dashDraw {
+    from {
+      stroke-dashoffset: 200;
+      opacity: 0;
+    }
+    to {
+      stroke-dashoffset: 0;
+      opacity: 1;
+    }
+  }
+
+  /* ── Hero card float entrance ────────────────────────────────────── */
+  @keyframes floatIn {
+    from { opacity: 0; transform: translateY(24px) scale(0.96); }
+    to   { opacity: 1; transform: translateY(0)   scale(1);     }
+  }
+  .card-float-enter {
+    animation: floatIn var(--motion-page) var(--ease-spring) both;
+  }
+
+  /* ── Soft pulse ring for compatibility score ──────────────────────── */
+  @keyframes pulseRing {
+    0%, 100% { opacity: 0.6; transform: scale(1);    }
+    50%       { opacity: 1;   transform: scale(1.04); }
+  }
+  .ring-pulse {
+    animation: pulseRing 2.5s ease-in-out infinite;
+  }
+
+  /* ── Compatibility bar fill ───────────────────────────────────────── */
+  @keyframes barFill {
+    from { width: 0%; }
+    to   { width: var(--bar-fill, 94%); }
+  }
+  .bar-fill-animate {
+    animation: barFill 1s var(--ease-smooth) 0.8s both;
+  }
+
+  /* ── Stats count-up shimmer overlay ──────────────────────────────── */
+  @keyframes shimmerSlide {
+    0%   { transform: translateX(-100%); }
+    100% { transform: translateX(200%);  }
+  }
+  .stat-shimmer::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.15) 50%, transparent 100%);
+    animation: shimmerSlide 2s ease-in-out 1.2s 1 both;
+  }
 }

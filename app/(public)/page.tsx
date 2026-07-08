@@ -204,122 +204,170 @@ export default function LandingPage() {
             </div>
 
             {/* ── Right: Floating Cards ───────────────────────────────── */}
-            <div className="relative flex flex-col items-center lg:items-end gap-5 lg:pl-8">
+            <div className="relative flex flex-col items-center lg:items-end gap-4 lg:pl-8">
 
-              {/* ── Card 1: Compatible Match ─────────────────────────── */}
-              <div className="w-full max-w-sm animate-in fade-in slide-in-from-bottom-4 duration-300 ease-out fill-mode-both [animation-delay:150ms]">
-                <div className="card-ai-match group relative rounded-2xl border bg-card/90 dark:bg-card/80 backdrop-blur-sm p-5 shadow-xl shadow-black/5 dark:shadow-black/20 overflow-hidden cursor-default">
+              {/* Decorative glow behind card 1 */}
+              <div className="pointer-events-none absolute -top-8 right-0 h-64 w-64 rounded-full bg-primary/8 blur-3xl" aria-hidden />
 
-                  {/* Subtle gradient shimmer on hover */}
-                  <div className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-gradient-to-br from-primary/5 via-transparent to-[color:var(--ai)]/5" />
+              {/* ────────────────────────────────────────────────────────
+                  Card 1 — 94% Compatible Match (Prerana S.)
+              ──────────────────────────────────────────────────────── */}
+              <div
+                className="w-full max-w-[340px]"
+                style={{ animation: "floatIn 0.5s cubic-bezier(0.34,1.56,0.64,1) 0.15s both" }}
+              >
+                <div className="card-ai-match group relative rounded-2xl border border-border/60 bg-card/95 dark:bg-card/85 backdrop-blur-md p-5 shadow-2xl shadow-black/8 dark:shadow-black/30 overflow-hidden cursor-default">
 
-                  {/* Match header */}
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="flex items-center gap-1.5 rounded-full bg-primary/10 dark:bg-primary/20 px-2.5 py-1 text-xs font-semibold text-primary">
+                  {/* Corner accent gradient — morphs on hover */}
+                  <div className="pointer-events-none absolute -top-12 -right-12 h-32 w-32 rounded-full bg-primary/10 blur-2xl transition-all duration-300 group-hover:bg-primary/18 group-hover:scale-110" />
+                  <div className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-gradient-to-br from-primary/[0.04] via-transparent to-[color:var(--ai)]/[0.04]" />
+
+                  {/* ── Top row: badge + ring ── */}
+                  <div className="relative flex items-center justify-between mb-4">
+                    {/* AI badge */}
+                    <div className="flex items-center gap-1.5 rounded-full bg-primary/10 dark:bg-primary/20 px-3 py-1 text-xs font-bold text-primary border border-primary/15">
                       <Sparkles className="h-3 w-3" />
                       94% Compatible Match
                     </div>
-                    {/* Animated compatibility ring */}
-                    <div className="relative h-10 w-10 shrink-0">
-                      <svg className="h-10 w-10 -rotate-90" viewBox="0 0 36 36">
+
+                    {/* Animated SVG ring — uses dashDraw keyframe */}
+                    <div className="relative h-11 w-11 shrink-0">
+                      {/* Outer glow ring */}
+                      <div className="absolute inset-0 rounded-full ring-pulse"
+                           style={{ background: "radial-gradient(circle, var(--primary) 0%, transparent 70%)", opacity: 0.12 }} />
+                      <svg
+                        className="h-11 w-11"
+                        viewBox="0 0 44 44"
+                        style={{ transform: "rotate(-90deg)" }}
+                      >
+                        {/* Track */}
                         <circle
-                          cx="18" cy="18" r="15.5"
+                          cx="22" cy="22" r="18"
                           fill="none"
                           stroke="currentColor"
-                          strokeWidth="2.5"
-                          className="text-muted/30"
+                          strokeWidth="3"
+                          className="text-muted/25 dark:text-muted/20"
                         />
+                        {/* Progress arc */}
                         <circle
-                          cx="18" cy="18" r="15.5"
+                          cx="22" cy="22" r="18"
                           fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2.5"
-                          strokeDasharray={`${94 * 0.974} 100`}
+                          stroke="url(#matchGradient)"
+                          strokeWidth="3"
                           strokeLinecap="round"
-                          className="text-primary transition-all duration-1000 ease-out [stroke-dashoffset:0] animate-[dashDraw_1.2s_ease-out_0.5s_both]"
                           style={{
-                            strokeDasharray: `${(2 * Math.PI * 15.5 * 94) / 100} ${2 * Math.PI * 15.5}`,
+                            strokeDasharray: `${(2 * Math.PI * 18 * 94) / 100} ${2 * Math.PI * 18}`,
+                            strokeDashoffset: "0",
+                            animation: "dashDraw 1.4s cubic-bezier(0.34,1.56,0.64,1) 0.6s both",
                           }}
                         />
+                        <defs>
+                          <linearGradient id="matchGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" stopColor="var(--primary)" />
+                            <stop offset="100%" stopColor="var(--trust)" />
+                          </linearGradient>
+                        </defs>
                       </svg>
-                      <span className="absolute inset-0 flex items-center justify-center text-[10px] font-bold text-primary">
+                      <span className="absolute inset-0 flex items-center justify-center text-[10px] font-extrabold text-primary">
                         94%
                       </span>
                     </div>
                   </div>
 
-                  {/* User info */}
-                  <div className="flex items-center gap-3 mb-4">
-                    {/* Avatar placeholder with gradient */}
-                    <div className="relative h-12 w-12 shrink-0 rounded-full bg-gradient-to-br from-[color:var(--community)] to-[color:var(--ai)] flex items-center justify-center text-white font-bold text-lg shadow-md">
-                      P
-                      {/* Online dot */}
+                  {/* ── User row ── */}
+                  <div className="relative flex items-center gap-3 mb-4">
+                    {/* Avatar with gradient background */}
+                    <div className="relative h-12 w-12 shrink-0 rounded-full overflow-hidden shadow-md">
+                      <div className="h-full w-full bg-gradient-to-br from-[color:var(--community-light)] via-[color:var(--community)] to-[color:var(--ai)] flex items-center justify-center text-white font-extrabold text-lg select-none">
+                        P
+                      </div>
+                      {/* Online indicator */}
                       <span className="absolute bottom-0 right-0 h-3 w-3 rounded-full bg-[color:var(--success)] border-2 border-card" />
                     </div>
-                    <div>
-                      <p className="font-semibold text-sm">Prerana S.</p>
-                      <p className="text-xs text-muted-foreground">Kathmandu</p>
+                    <div className="min-w-0">
+                      <p className="font-bold text-sm text-foreground leading-tight">Prerana S.</p>
+                      <p className="text-xs text-muted-foreground mt-0.5">Kathmandu</p>
                     </div>
                   </div>
 
-                  {/* Compatibility bar */}
-                  <div className="mb-4">
+                  {/* ── Compatibility bar ── */}
+                  <div className="relative mb-4">
                     <div className="flex items-center justify-between mb-1.5">
-                      <span className="text-xs text-muted-foreground">Compatibility</span>
-                      <span className="text-xs font-bold text-primary">94%</span>
+                      <span className="text-xs font-medium text-muted-foreground">Compatibility</span>
+                      <span className="text-xs font-extrabold text-primary">94%</span>
                     </div>
-                    <div className="h-1.5 w-full rounded-full bg-muted overflow-hidden">
+                    <div className="h-2 w-full rounded-full bg-muted/60 dark:bg-muted/40 overflow-hidden">
                       <div
-                        className="h-full rounded-full bg-gradient-to-r from-primary to-[color:var(--trust)] transition-all duration-1000 ease-out animate-in [animation-delay:600ms]"
-                        style={{ width: "94%" }}
+                        className="h-full rounded-full bg-gradient-to-r from-primary via-primary to-[color:var(--trust)]"
+                        style={{
+                          "--bar-fill": "94%",
+                          animation: "barFill 1s cubic-bezier(0.22,1,0.36,1) 0.8s both",
+                        } as React.CSSProperties}
                       />
                     </div>
                   </div>
 
-                  {/* Trait badges */}
-                  <div className="flex flex-wrap gap-2">
-                    {[
-                      { label: "Clean", icon: "✓" },
-                      { label: "Non-Smoker", icon: "✓" },
-                      { label: "Same Budget", icon: "✓" },
-                    ].map((trait) => (
+                  {/* ── Trait chips ── */}
+                  <div className="relative flex flex-wrap gap-1.5">
+                    {(["Clean", "Non-Smoker", "Same Budget"] as const).map((trait) => (
                       <span
-                        key={trait.label}
-                        className="inline-flex items-center gap-1 rounded-full border border-primary/20 bg-primary/5 dark:bg-primary/10 px-2.5 py-0.5 text-[11px] font-medium text-primary"
+                        key={trait}
+                        className="inline-flex items-center gap-1 rounded-full border border-primary/20 bg-primary/6 dark:bg-primary/12 px-2.5 py-0.5 text-[11px] font-semibold text-primary transition-colors duration-150 hover:bg-primary/12 dark:hover:bg-primary/20"
                       >
-                        <CheckCircle2 className="h-3 w-3" />
-                        {trait.label}
+                        <CheckCircle2 className="h-3 w-3 shrink-0" />
+                        {trait}
                       </span>
                     ))}
                   </div>
                 </div>
               </div>
 
-              {/* ── Card 2: Stats (horizontal) ───────────────────────── */}
-              <div className="w-full max-w-sm animate-in fade-in slide-in-from-bottom-4 duration-300 ease-out fill-mode-both [animation-delay:250ms]">
-                <div className="card-dashboard relative rounded-2xl border bg-card/90 dark:bg-card/80 backdrop-blur-sm px-5 py-4 shadow-xl shadow-black/5 dark:shadow-black/20 overflow-hidden cursor-default">
+              {/* ────────────────────────────────────────────────────────
+                  Card 2 — Horizontal Stats (Users / Listings / Matches)
+              ──────────────────────────────────────────────────────── */}
+              <div
+                className="w-full max-w-[340px]"
+                style={{ animation: "floatIn 0.5s cubic-bezier(0.34,1.56,0.64,1) 0.28s both" }}
+              >
+                <div className="card-dashboard stat-shimmer relative rounded-2xl border border-border/60 bg-card/95 dark:bg-card/85 backdrop-blur-md overflow-hidden shadow-xl shadow-black/6 dark:shadow-black/25 cursor-default">
 
-                  {/* Background accent */}
-                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-primary/[0.03] via-transparent to-[color:var(--ai)]/[0.03]" />
+                  {/* Subtle gradient wash */}
+                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[color:var(--trust)]/[0.035] via-transparent to-[color:var(--success)]/[0.035]" />
 
-                  <div className="relative flex items-center divide-x divide-border">
-                    {[
-                      { value: "12,000+", label: "Users",    icon: Users,      colorVar: "var(--trust)",     bgVar: "var(--trust-light)"     },
-                      { value: "3,500+",  label: "Listings", icon: Home,       colorVar: "var(--community)", bgVar: "var(--community-light)" },
-                      { value: "2,100+",  label: "Matches",  icon: TrendingUp, colorVar: "var(--success)",   bgVar: "var(--success-light)"   },
-                    ].map((stat) => (
-                      <div key={stat.label} className="flex-1 flex flex-col items-center gap-1.5 px-3 py-1 first:pl-0 last:pr-0">
+                  <div className="relative flex items-stretch">
+                    {([
+                      { value: "12,000+", label: "Users",    icon: Users,      color: "var(--trust)",     bg: "var(--trust-light)"     },
+                      { value: "3,500+",  label: "Listings", icon: Home,       color: "var(--community)", bg: "var(--community-light)" },
+                      { value: "2,100+",  label: "Matches",  icon: TrendingUp, color: "var(--success)",   bg: "var(--success-light)"   },
+                    ] as const).map((stat, idx) => (
+                      <div
+                        key={stat.label}
+                        className="flex-1 flex flex-col items-center justify-center gap-2 px-2 py-4"
+                        style={{
+                          borderRight: idx < 2 ? "1px solid var(--border)" : "none",
+                        }}
+                      >
+                        {/* Icon badge */}
                         <div
-                          className="flex h-7 w-7 items-center justify-center rounded-lg"
-                          style={{ backgroundColor: stat.bgVar }}
+                          className="flex h-8 w-8 items-center justify-center rounded-xl transition-transform duration-200 hover:scale-110"
+                          style={{ backgroundColor: stat.bg }}
                         >
                           <stat.icon
-                            className="h-3.5 w-3.5"
-                            style={{ color: stat.colorVar }}
+                            className="h-4 w-4"
+                            style={{ color: stat.color }}
                           />
                         </div>
-                        <span className="text-base font-extrabold tracking-tight leading-none">{stat.value}</span>
-                        <span className="text-[11px] text-muted-foreground font-medium">{stat.label}</span>
+                        {/* Value */}
+                        <span
+                          className="text-[15px] font-extrabold tracking-tight leading-none"
+                          style={{ color: stat.color }}
+                        >
+                          {stat.value}
+                        </span>
+                        {/* Label */}
+                        <span className="text-[11px] text-muted-foreground font-medium text-center leading-tight">
+                          {stat.label}
+                        </span>
                       </div>
                     ))}
                   </div>

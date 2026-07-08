@@ -10,12 +10,9 @@ import {
   Users,
   Home,
   TrendingUp,
-  ArrowRight,
-  ChevronLeft,
   ChevronRight,
-  Briefcase,
-  Calendar,
-  Building2,
+  ChevronLeft,
+  ShieldCheck,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -36,6 +33,19 @@ const STATS = [
   { value: "92%", label: "Average Compatibility", icon: Sparkles, color: "var(--ai)" },
 ];
 
+// Human portrait photos from /public (Unsplash / Pexels avif/jpg)
+const PHOTOS = {
+  manSuit:        "/photo-1519085360753-af0119f7cbe7.avif",   // man professional
+  womanProf:      "/photo-1573496359142-b8d87734a5a2.avif",   // woman professional
+  person1:        "/photo-1612320648993-61c1cd604b71.avif",   // person
+  womanPortrait:  "/premium_photo-1664471481572-c59a951a7755.avif", // woman portrait
+  person2:        "/premium_photo-1677368597077-009727e906db.avif", // person
+  person3:        "/premium_photo-1683887034491-f58b4c4fca72.avif", // person
+  person4:        "/premium_photo-1689609950112-d66095626efb.avif", // person
+  person5:        "/premium_photo-1658506656752-4f1b1c1d5916.avif", // person
+  istockPerson:   "/istockphoto-1149822847-612x612.webp",      // person (istock)
+};
+
 const MOCK_ROOMMATES: RoommateData[] = [
   {
     id: "1",
@@ -45,7 +55,7 @@ const MOCK_ROOMMATES: RoommateData[] = [
     location: "Thamel, Kathmandu",
     budget: 8000,
     moveInDate: "April 2025",
-    photo: undefined,
+    photo: PHOTOS.manSuit,
     bio: "I'm a medical student looking for a clean, quiet roommate. I usually study late nights and wake up early. Non-smoker, vegetarian, and I love keeping shared spaces organized.",
     compatibilityScore: 94,
     trustScore: 88,
@@ -64,7 +74,7 @@ const MOCK_ROOMMATES: RoommateData[] = [
     location: "Lazimpat, Kathmandu",
     budget: 12000,
     moveInDate: "May 2025",
-    photo: undefined,
+    photo: PHOTOS.womanProf,
     bio: "Creative professional working remotely. I appreciate a clean space and love cooking. Looking for someone chill and respectful of work hours.",
     compatibilityScore: 87,
     trustScore: 92,
@@ -83,7 +93,7 @@ const MOCK_ROOMMATES: RoommateData[] = [
     location: "Patan, Lalitpur",
     budget: 15000,
     moveInDate: "March 2025",
-    photo: undefined,
+    photo: PHOTOS.person1,
     compatibilityScore: 76,
     trustScore: 85,
     isVerified: true,
@@ -100,7 +110,7 @@ const MOCK_ROOMMATES: RoommateData[] = [
     location: "Chabahil, Kathmandu",
     budget: 10000,
     moveInDate: "April 2025",
-    photo: undefined,
+    photo: PHOTOS.womanPortrait,
     compatibilityScore: undefined,
     trustScore: 78,
     isVerified: false,
@@ -117,7 +127,7 @@ const MOCK_ROOMMATES: RoommateData[] = [
     location: "Baluwatar, Kathmandu",
     budget: 18000,
     moveInDate: "June 2025",
-    photo: undefined,
+    photo: PHOTOS.person2,
     compatibilityScore: 91,
     trustScore: 95,
     isVerified: true,
@@ -135,7 +145,7 @@ const MOCK_ROOMMATES: RoommateData[] = [
     location: "Lakeside, Pokhara",
     budget: 9000,
     moveInDate: "April 2025",
-    photo: undefined,
+    photo: PHOTOS.person3,
     compatibilityScore: 83,
     trustScore: 81,
     isVerified: true,
@@ -143,6 +153,41 @@ const MOCK_ROOMMATES: RoommateData[] = [
     reviewCount: 11,
     responseTime: "< 2 hours",
     lifestyleChips: ["Quiet", "Remote Worker", "Bookworm", "Vegetarian"],
+  },
+  {
+    id: "7",
+    name: "Suresh Basnet",
+    age: 28,
+    occupation: "Civil Engineer",
+    location: "Bhaktapur",
+    budget: 11000,
+    moveInDate: "May 2025",
+    photo: PHOTOS.person4,
+    compatibilityScore: 79,
+    trustScore: 87,
+    isVerified: true,
+    rating: 4.4,
+    reviewCount: 8,
+    responseTime: "< 3 hours",
+    lifestyleChips: ["Non-Smoker", "Gym", "Early Bird", "Clean"],
+  },
+  {
+    id: "8",
+    name: "Meera Poudel",
+    age: 24,
+    occupation: "Nurse at Teaching Hospital",
+    location: "Maharajgunj, Kathmandu",
+    budget: 7500,
+    moveInDate: "June 2025",
+    photo: PHOTOS.person5,
+    compatibilityScore: 88,
+    trustScore: 90,
+    isVerified: true,
+    rating: 4.8,
+    reviewCount: 15,
+    responseTime: "< 1 hour",
+    lifestyleChips: ["Quiet", "Non-Smoker", "Vegetarian", "Early Bird"],
+    compatibilityReasons: ["Same Lifestyle Values", "Compatible Schedules", "Both Non-Smokers"],
   },
 ];
 
@@ -387,40 +432,52 @@ export default function RoommatesPage() {
         </section>
       )}
 
-      {/* ── Verified Roommates (Horizontal Scroll) ────────────────────────── */}
+      {/* ── Verified Roommates — 4-column equal-height grid ──────────── */}
       {verifiedRoommates.length > 0 && (
         <section className="py-16 lg:py-20 border-y bg-muted/20">
           <div className="container mx-auto px-4 lg:px-8">
+            {/* Section header */}
             <div className="flex items-end justify-between mb-8">
               <div>
+                <div className="flex items-center gap-2 mb-2">
+                  <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-[color:var(--success-light)]">
+                    <ShieldCheck className="h-3.5 w-3.5 text-[color:var(--success)]" />
+                  </div>
+                  <span className="text-xs font-bold uppercase tracking-widest text-[color:var(--success)]">
+                    Identity Verified
+                  </span>
+                </div>
                 <h2 className="text-2xl lg:text-3xl font-bold">Verified Roommates</h2>
-                <p className="text-muted-foreground mt-1">
-                  Identity verified with high trust scores
+                <p className="text-muted-foreground mt-1 text-sm">
+                  {verifiedRoommates.length} roommates with verified identity &amp; high trust scores
                 </p>
               </div>
-              <div className="flex items-center gap-2">
-                <button
-                  aria-label="Previous"
-                  className="flex h-9 w-9 items-center justify-center rounded-full border bg-card btn-secondary-motion hover:border-primary hover:text-primary"
-                >
-                  <ChevronLeft className="h-4 w-4" />
-                </button>
-                <button
-                  aria-label="Next"
-                  className="flex h-9 w-9 items-center justify-center rounded-full border bg-card btn-secondary-motion hover:border-primary hover:text-primary"
-                >
-                  <ChevronRight className="h-4 w-4" />
-                </button>
-              </div>
+              <Link href="/roommates">
+                <Button variant="outline" size="sm" className="btn-secondary-motion gap-1.5 rounded-xl hidden sm:flex">
+                  View All
+                  <ChevronRight className="h-3.5 w-3.5" />
+                </Button>
+              </Link>
             </div>
 
-            <div className="flex gap-5 overflow-x-auto pb-4 -mx-4 px-4 lg:mx-0 lg:px-0 scrollbar-hide">
-              {verifiedRoommates.map((roommate) => (
-                <div key={roommate.id} className="w-80 shrink-0">
+            {/*
+              4-column grid on xl, 3 on lg, 2 on sm, 1 on mobile.
+              items-stretch makes every cell fill the row height.
+              Each card uses equalHeight so the action row stays pinned bottom.
+            */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 items-stretch">
+              {verifiedRoommates.map((roommate, i) => (
+                <div
+                  key={roommate.id}
+                  className="animate-in fade-in slide-in-from-bottom-3 duration-300 fill-mode-both flex"
+                  style={{ animationDelay: `${i * 60}ms` }}
+                >
                   <RoommateCard
                     roommate={roommate}
                     onViewProfile={handleViewProfile}
                     onMessage={handleMessage}
+                    equalHeight
+                    className="w-full"
                   />
                 </div>
               ))}

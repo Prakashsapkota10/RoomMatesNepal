@@ -17,12 +17,12 @@ interface TopNavProps {
 
 // Extra nav items to match the screenshot (Browse Rooms, Find Roommates, AI Match, Community, Pricing, About)
 const EXTENDED_NAV = [
-  { label: "Find Rooms",      href: "/listings"  },
-  { label: "Find Roommates",  href: "/roommates" },
-  { label: "AI Match",        href: "/matches"   },
-  { label: "Community",       href: "/about"     },
-  { label: "Pricing",         href: "/pricing"   },
-  { label: "About",           href: "/about#about" },
+  { label: "Find Rooms",      href: "/listings",     key: "find-rooms"      },
+  { label: "Find Roommates",  href: "/roommates",    key: "find-roommates"  },
+  { label: "AI Match",        href: "/matches",      key: "ai-match"        },
+  { label: "Community",       href: "/community",    key: "community"       },
+  { label: "Pricing",         href: "/pricing",      key: "pricing"         },
+  { label: "About",           href: "/about",        key: "about"           },
 ];
 
 export function TopNav({
@@ -104,7 +104,7 @@ export function TopNav({
             const active = pathname === item.href || (item.href !== "/" && pathname.startsWith(item.href));
             return (
               <Link
-                key={item.href}
+                key={item.key}
                 href={item.href}
                 className={cn(
                   "nav-link relative px-3 py-1.5 text-sm font-medium rounded-md",
@@ -215,7 +215,7 @@ export function TopNav({
               const active = pathname === item.href || (item.href !== "/" && pathname.startsWith(item.href));
               return (
                 <Link
-                  key={item.href}
+                  key={item.key}
                   href={item.href}
                   onClick={() => setMobileOpen(false)}
                   style={{ animationDelay: `${i * 40}ms` }}
