@@ -17,12 +17,12 @@ interface TopNavProps {
 
 // Extra nav items to match the screenshot (Browse Rooms, Find Roommates, AI Match, Community, Pricing, About)
 const EXTENDED_NAV = [
-  { label: "Find Rooms", href: "/listings" },
-  { label: "Find Roommates", href: "/roommates" },
-  { label: "AI Match", href: "/matches" },
-  { label: "Community", href: "/about" },
-  { label: "Pricing", href: "/pricing" },
-  { label: "About", href: "/about" },
+  { label: "Find Rooms",      href: "/listings"  },
+  { label: "Find Roommates",  href: "/roommates" },
+  { label: "AI Match",        href: "/matches"   },
+  { label: "Community",       href: "/about"     },
+  { label: "Pricing",         href: "/pricing"   },
+  { label: "About",           href: "/about#about" },
 ];
 
 export function TopNav({
