@@ -8,6 +8,7 @@ export const metadata: Metadata = buildMeta({
 });
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 interface SearchParams {
   q?: string;
   city?: string;
@@ -160,6 +161,10 @@ export default async function ListingsPage({
       </div>
     </div>
   );
+=======
+export default function ListingsPage() {
+  return <ListingsContent />;
+>>>>>>> cbaa3b84ae58cba8ffb7aacdd264e5bd082589e8
 =======
 export default function ListingsPage() {
   return <ListingsContent />;

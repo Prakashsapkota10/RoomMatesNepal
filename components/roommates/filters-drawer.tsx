@@ -442,6 +442,7 @@ function FiltersForm({ draft, onChange, onApply, onClear, immediate = false }: F
     <div className="flex flex-col gap-0">
       {/* ── Location ─────────────────────────────────────────────────── */}
 <<<<<<< HEAD
+<<<<<<< HEAD
       <div className="space-y-2 px-4 py-3">
         <Label className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
           Location
@@ -449,12 +450,17 @@ function FiltersForm({ draft, onChange, onApply, onClear, immediate = false }: F
         <Select value={draft.location} onValueChange={(v) => update({ location: v ?? "all" })}>
           <SelectTrigger className="input-container h-8 text-xs">
 =======
+=======
+>>>>>>> cbaa3b84ae58cba8ffb7aacdd264e5bd082589e8
       <div className="space-y-1.5 px-4 py-3">
         <Label className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
           Location
         </Label>
         <Select value={draft.location} onValueChange={(v) => update({ location: v })}>
           <SelectTrigger className="input-container h-8 text-sm">
+<<<<<<< HEAD
+>>>>>>> cbaa3b84ae58cba8ffb7aacdd264e5bd082589e8
+=======
 >>>>>>> cbaa3b84ae58cba8ffb7aacdd264e5bd082589e8
             <SelectValue placeholder="Select location" />
           </SelectTrigger>
@@ -474,6 +480,7 @@ function FiltersForm({ draft, onChange, onApply, onClear, immediate = false }: F
       {/* ── Budget ───────────────────────────────────────────────────── */}
       <div className="space-y-2 px-4 py-3">
 <<<<<<< HEAD
+<<<<<<< HEAD
         <Label className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
           Budget (NPR/month)
         </Label>
@@ -481,12 +488,17 @@ function FiltersForm({ draft, onChange, onApply, onClear, immediate = false }: F
           <span className="font-bold text-primary">{draft.budgetMin.toLocaleString()}</span>
           <span className="text-muted-foreground">—</span>
 =======
+=======
+>>>>>>> cbaa3b84ae58cba8ffb7aacdd264e5bd082589e8
         <Label className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
           Budget Range (NPR/month)
         </Label>
         <div className="flex items-center justify-between text-xs">
           <span className="font-bold text-primary">{draft.budgetMin.toLocaleString()}</span>
           <span className="text-muted-foreground">to</span>
+<<<<<<< HEAD
+>>>>>>> cbaa3b84ae58cba8ffb7aacdd264e5bd082589e8
+=======
 >>>>>>> cbaa3b84ae58cba8ffb7aacdd264e5bd082589e8
           <span className="font-bold text-primary">{draft.budgetMax.toLocaleString()}</span>
         </div>
@@ -505,9 +517,12 @@ function FiltersForm({ draft, onChange, onApply, onClear, immediate = false }: F
       {/* ── Gender ───────────────────────────────────────────────────── */}
       <div className="space-y-2 px-4 py-3">
 <<<<<<< HEAD
+<<<<<<< HEAD
         <Label className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
           Gender
 =======
+=======
+>>>>>>> cbaa3b84ae58cba8ffb7aacdd264e5bd082589e8
         <Label className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
           Gender Preference
 >>>>>>> cbaa3b84ae58cba8ffb7aacdd264e5bd082589e8
@@ -516,7 +531,11 @@ function FiltersForm({ draft, onChange, onApply, onClear, immediate = false }: F
           value={draft.gender}
           onValueChange={(v) => update({ gender: v })}
 <<<<<<< HEAD
+<<<<<<< HEAD
           className="flex gap-2"
+=======
+          className="grid grid-cols-3 gap-1.5"
+>>>>>>> cbaa3b84ae58cba8ffb7aacdd264e5bd082589e8
 =======
           className="grid grid-cols-3 gap-1.5"
 >>>>>>> cbaa3b84ae58cba8ffb7aacdd264e5bd082589e8
@@ -526,7 +545,11 @@ function FiltersForm({ draft, onChange, onApply, onClear, immediate = false }: F
               key={g}
               htmlFor={`gender-${g}`}
 <<<<<<< HEAD
+<<<<<<< HEAD
               className="flex-1 flex cursor-pointer items-center justify-center rounded-md border px-2 py-1.5 text-xs font-medium transition-colors has-[[data-state=checked]]:border-primary has-[[data-state=checked]]:bg-primary/8 has-[[data-state=checked]]:text-primary"
+=======
+              className="flex cursor-pointer items-center justify-center rounded-lg border px-2 py-1.5 text-xs font-medium transition-all duration-150 hover:border-primary/50 has-[[data-state=checked]]:border-primary has-[[data-state=checked]]:bg-primary/8 has-[[data-state=checked]]:text-primary"
+>>>>>>> cbaa3b84ae58cba8ffb7aacdd264e5bd082589e8
 =======
               className="flex cursor-pointer items-center justify-center rounded-lg border px-2 py-1.5 text-xs font-medium transition-all duration-150 hover:border-primary/50 has-[[data-state=checked]]:border-primary has-[[data-state=checked]]:bg-primary/8 has-[[data-state=checked]]:text-primary"
 >>>>>>> cbaa3b84ae58cba8ffb7aacdd264e5bd082589e8
@@ -541,12 +564,21 @@ function FiltersForm({ draft, onChange, onApply, onClear, immediate = false }: F
       <Separator />
 
 <<<<<<< HEAD
+<<<<<<< HEAD
       {/* ── Occupation ───────────────────────────────────────────────── */}
       <div className="space-y-2 px-4 py-3">
         <Label className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
           Occupation
         </Label>
         <div className="space-y-1.5">
+=======
+      {/* ── Occupation (multi-select checkboxes) ─────────────────────── */}
+      <div className="space-y-2 px-4 py-3">
+        <Label className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
+          Occupation
+        </Label>
+        <div className="grid grid-cols-1 gap-1.5">
+>>>>>>> cbaa3b84ae58cba8ffb7aacdd264e5bd082589e8
 =======
       {/* ── Occupation (multi-select checkboxes) ─────────────────────── */}
       <div className="space-y-2 px-4 py-3">
@@ -572,10 +604,15 @@ function FiltersForm({ draft, onChange, onApply, onClear, immediate = false }: F
                 className="h-3.5 w-3.5 shrink-0"
               />
 <<<<<<< HEAD
+<<<<<<< HEAD
               <Label htmlFor={`occ-${occ.id}`} className="text-xs font-normal cursor-pointer leading-none">
                 {occ.label}
               </Label>
             </div>
+=======
+              {occ.label}
+            </Label>
+>>>>>>> cbaa3b84ae58cba8ffb7aacdd264e5bd082589e8
 =======
               {occ.label}
             </Label>
@@ -587,12 +624,21 @@ function FiltersForm({ draft, onChange, onApply, onClear, immediate = false }: F
       <Separator />
 
 <<<<<<< HEAD
+<<<<<<< HEAD
       {/* ── Lifestyle ────────────────────────────────────────────────── */}
       <div className="space-y-2 px-4 py-3">
         <Label className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
           Lifestyle
         </Label>
         <div className="flex flex-col gap-1.5">
+=======
+      {/* ── Lifestyle (all 8 options) ─────────────────────────────────── */}
+      <div className="space-y-2 px-4 py-3">
+        <Label className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
+          Lifestyle
+        </Label>
+        <div className="grid grid-cols-2 gap-1.5">
+>>>>>>> cbaa3b84ae58cba8ffb7aacdd264e5bd082589e8
 =======
       {/* ── Lifestyle (all 8 options) ─────────────────────────────────── */}
       <div className="space-y-2 px-4 py-3">
@@ -620,10 +666,15 @@ function FiltersForm({ draft, onChange, onApply, onClear, immediate = false }: F
                 className="h-3.5 w-3.5 shrink-0"
               />
 <<<<<<< HEAD
+<<<<<<< HEAD
               <Label htmlFor={`ls-${opt.id}`} className="text-xs font-normal cursor-pointer leading-none">
                 {opt.label}
               </Label>
             </div>
+=======
+              {opt.label}
+            </Label>
+>>>>>>> cbaa3b84ae58cba8ffb7aacdd264e5bd082589e8
 =======
               {opt.label}
             </Label>
@@ -678,12 +729,15 @@ function FiltersForm({ draft, onChange, onApply, onClear, immediate = false }: F
       <div className="space-y-2 px-4 py-3">
         <div className="flex items-center justify-between">
 <<<<<<< HEAD
+<<<<<<< HEAD
           <Label className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
             Trust Score
           </Label>
           <span className="text-xs font-bold text-primary">
             {draft.minTrustScore}+
 =======
+=======
+>>>>>>> cbaa3b84ae58cba8ffb7aacdd264e5bd082589e8
           <Label className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
             Min Trust Score
           </Label>
@@ -708,12 +762,15 @@ function FiltersForm({ draft, onChange, onApply, onClear, immediate = false }: F
       <div className="space-y-2 px-4 py-3">
         <div className="flex items-center justify-between">
 <<<<<<< HEAD
+<<<<<<< HEAD
           <Label className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
             Compatibility
           </Label>
           <span className="text-xs font-bold text-primary">
             {draft.minCompatibility}%+
 =======
+=======
+>>>>>>> cbaa3b84ae58cba8ffb7aacdd264e5bd082589e8
           <Label className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
             Min Compatibility
           </Label>
@@ -736,17 +793,23 @@ function FiltersForm({ draft, onChange, onApply, onClear, immediate = false }: F
 
       {/* ── Sort By ──────────────────────────────────────────────────── */}
 <<<<<<< HEAD
+<<<<<<< HEAD
       <div className="space-y-2 px-4 py-3">
         <Label className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
           Sort By
         </Label>
         <Select value={draft.sortBy} onValueChange={(v) => update({ sortBy: v ?? "newest" })}>
 =======
+=======
+>>>>>>> cbaa3b84ae58cba8ffb7aacdd264e5bd082589e8
       <div className="space-y-1.5 px-4 py-3">
         <Label className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
           Sort By
         </Label>
         <Select value={draft.sortBy} onValueChange={(v) => update({ sortBy: v })}>
+<<<<<<< HEAD
+>>>>>>> cbaa3b84ae58cba8ffb7aacdd264e5bd082589e8
+=======
 >>>>>>> cbaa3b84ae58cba8ffb7aacdd264e5bd082589e8
           <SelectTrigger className="input-container h-8 text-xs">
             <SelectValue />
@@ -768,6 +831,20 @@ function FiltersForm({ draft, onChange, onApply, onClear, immediate = false }: F
 
 export function FiltersDrawer(props: FiltersDrawerProps) {
   const variant = props.variant ?? "roommate";
+<<<<<<< HEAD
+=======
+
+  /**
+   * Desktop: keep a local "draft" so the grid only re-renders on Apply,
+   * not on every slider tick.
+   */
+  const [roommateDraft, setRoommateDraft] = useState<RoommateFilters>(
+    variant === "roommate" ? props.filters : DEFAULT_FILTERS
+  );
+  const [listingDraft, setListingDraft] = useState<ListingFilters>(
+    variant === "listing" ? props.filters : DEFAULT_LISTING_FILTERS
+  );
+>>>>>>> cbaa3b84ae58cba8ffb7aacdd264e5bd082589e8
 
   /**
    * Use the parent filters as the single source of truth.
@@ -799,6 +876,9 @@ export function FiltersDrawer(props: FiltersDrawerProps) {
     } else {
       props.onFiltersChange(roommateDraft);
     }
+<<<<<<< HEAD
+>>>>>>> cbaa3b84ae58cba8ffb7aacdd264e5bd082589e8
+=======
 >>>>>>> cbaa3b84ae58cba8ffb7aacdd264e5bd082589e8
   };
 
@@ -874,6 +954,7 @@ export function FiltersDrawer(props: FiltersDrawerProps) {
 
             <ScrollArea className="flex-1">
 <<<<<<< HEAD
+<<<<<<< HEAD
               <FiltersForm
                 draft={draft}
                 onChange={handleChange}
@@ -881,6 +962,9 @@ export function FiltersDrawer(props: FiltersDrawerProps) {
                 onClear={handleClear}
                 immediate
               />
+=======
+              {mobileFormContent}
+>>>>>>> cbaa3b84ae58cba8ffb7aacdd264e5bd082589e8
 =======
               {mobileFormContent}
 >>>>>>> cbaa3b84ae58cba8ffb7aacdd264e5bd082589e8
@@ -905,6 +989,7 @@ export function FiltersDrawer(props: FiltersDrawerProps) {
       <div className="hidden lg:block">
         <div className="sticky top-20">
 <<<<<<< HEAD
+<<<<<<< HEAD
           <div className="rounded-2xl border bg-card shadow-sm overflow-hidden flex flex-col max-h-[calc(100vh-120px)]">
 
             {/* Card header */}
@@ -919,11 +1004,19 @@ export function FiltersDrawer(props: FiltersDrawerProps) {
                 <div className="flex h-6 w-6 items-center justify-center rounded-md bg-primary/10">
                   <SlidersHorizontal className="h-3 w-3 text-primary" />
 >>>>>>> cbaa3b84ae58cba8ffb7aacdd264e5bd082589e8
+=======
+          <div className="rounded-2xl border bg-card shadow-sm overflow-hidden flex flex-col h-[calc(100vh-88px)]">
+            <div className="shrink-0 flex items-center justify-between px-4 py-3 border-b bg-card">
+              <div className="flex items-center gap-2">
+                <div className="flex h-6 w-6 items-center justify-center rounded-md bg-primary/10">
+                  <SlidersHorizontal className="h-3 w-3 text-primary" />
+>>>>>>> cbaa3b84ae58cba8ffb7aacdd264e5bd082589e8
                 </div>
                 <h3 className="font-semibold text-sm">Filters</h3>
               </div>
               <button
                 onClick={handleClear}
+<<<<<<< HEAD
 <<<<<<< HEAD
                 className="text-xs text-primary hover:underline font-medium"
               >
@@ -931,6 +1024,10 @@ export function FiltersDrawer(props: FiltersDrawerProps) {
 =======
                 className="text-xs text-muted-foreground hover:text-destructive transition-colors duration-150 font-medium flex items-center gap-1"
               >
+=======
+                className="text-xs text-muted-foreground hover:text-destructive transition-colors duration-150 font-medium flex items-center gap-1"
+              >
+>>>>>>> cbaa3b84ae58cba8ffb7aacdd264e5bd082589e8
                 <X className="h-3 w-3" />
                 Clear All
 >>>>>>> cbaa3b84ae58cba8ffb7aacdd264e5bd082589e8
@@ -939,6 +1036,7 @@ export function FiltersDrawer(props: FiltersDrawerProps) {
 
             <ScrollArea className="flex-1 min-h-0">
 <<<<<<< HEAD
+<<<<<<< HEAD
               <FiltersForm
                 draft={draft}
                 onChange={handleChange}
@@ -946,6 +1044,10 @@ export function FiltersDrawer(props: FiltersDrawerProps) {
                 onClear={handleClear}
                 immediate
               />
+=======
+              {formContent}
+              <div className="h-2" />
+>>>>>>> cbaa3b84ae58cba8ffb7aacdd264e5bd082589e8
             </ScrollArea>
 =======
               {formContent}
