@@ -34,6 +34,9 @@ import {
   AccordionContent,
 } from "@/components/ui/accordion";
 import { APP_NAME, POPULAR_LOCATIONS, SUBSCRIPTION_PLANS } from "@/lib/constants";
+import { RoommateCard } from "@/components/roommates/roommate-card";
+import { RoomCard } from "@/components/roo/room-card/page";
+import { MOCK_ROOMMATES, MOCK_LISTINGS } from "@/lib/mock-data";
 
 export const metadata: Metadata = {
   title: `${APP_NAME} — AI-Powered Roommate Finder in Nepal`,
@@ -43,44 +46,11 @@ export const metadata: Metadata = {
 
 // ─── Static data ─────────────────────────────────────────────────────────────
 
-const FEATURED_LISTINGS = [
-  {
-    id: "1",
-    title: "Cozy Room in Thamel",
-    location: "Thamel, Kathmandu",
-    price: 8000,
-    type: "Single Room",
-    image: "/public/globe.svg",
-    badges: ["WiFi", "Furnished"],
-  },
-  {
-    id: "2",
-    title: "Modern Apartment Share",
-    location: "Lazimpat, Kathmandu",
-    price: 15000,
-    type: "Apartment",
-    image: "/public/globe.svg",
-    badges: ["Parking", "Kitchen"],
-  },
-  {
-    id: "3",
-    title: "Peaceful PG in Patan",
-    location: "Patan, Lalitpur",
-    price: 6500,
-    type: "PG",
-    image: "/public/globe.svg",
-    badges: ["Security", "Water"],
-  },
-  {
-    id: "4",
-    title: "Student Hostel Room",
-    location: "Chabahil, Kathmandu",
-    price: 4500,
-    type: "Hostel",
-    image: "/public/globe.svg",
-    badges: ["WiFi", "Laundry"],
-  },
-];
+// Featured roommates: top 4 by compatibility score
+const FEATURED_ROOMMATES = MOCK_ROOMMATES.filter((r) => r.compatibilityScore).slice(0, 4);
+
+// Premium rooms: first 3 verified listings with a high landlord trust score
+const PREMIUM_ROOMS = MOCK_LISTINGS.filter((l) => l.isVerified).slice(0, 3);
 
 const TESTIMONIALS = [
   {
@@ -447,7 +417,12 @@ export default function LandingPage() {
             {/* I Need a Room */}
             <Link href="/listings" className="card-listing group relative overflow-hidden rounded-2xl min-h-[220px] flex flex-col justify-end">
               <div className="absolute inset-0 bg-gradient-to-br from-primary/80 to-primary/60" />
-              <div className="absolute inset-0 bg-[url('/images/room-bg.jpg')] bg-cover bg-center opacity-40 transition-transform duration-500 group-hover:scale-[1.03]" />
+              {/* real apartment photo */}
+              <img
+                src="/pexels-szafran-37485325.jpg"
+                alt="Apartment building"
+                className="absolute inset-0 h-full w-full object-cover opacity-40 transition-transform duration-500 group-hover:scale-[1.03]"
+              />
               <div className="relative p-6 text-white">
                 <div className="flex items-center gap-2 mb-1">
                   <span className="text-2xl">🏠</span>
@@ -463,7 +438,12 @@ export default function LandingPage() {
             {/* I Need a Roommate */}
             <Link href="/roommates" className="card-listing group relative overflow-hidden rounded-2xl min-h-[220px] flex flex-col justify-end">
               <div className="absolute inset-0 bg-gradient-to-br from-[color:var(--community)]/80 to-[color:var(--community)]/60" />
-              <div className="absolute inset-0 bg-[url('/images/roommates-bg.jpg')] bg-cover bg-center opacity-40 transition-transform duration-500 group-hover:scale-[1.03]" />
+              {/* real apartment photo */}
+              <img
+                src="/pexels-alinaskazka-20094613.jpg"
+                alt="Residential building"
+                className="absolute inset-0 h-full w-full object-cover opacity-40 transition-transform duration-500 group-hover:scale-[1.03]"
+              />
               <div className="relative p-6 text-white">
                 <div className="flex items-center gap-2 mb-1">
                   <span className="text-2xl">🤝</span>
@@ -563,40 +543,14 @@ export default function LandingPage() {
             </div>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {[
-              { name: "Sagar K., 24",  role: "Medical Student at TUTH", budget: 8000,  tags: ["Non-Smoker", "Gym Freak"], topMatch: true  },
-              { name: "Nikita R., 22", role: "Graphic Designer",         budget: 12000, tags: ["Art Lover", "Quiet"],      topMatch: false },
-              { name: "Arun M., 26",   role: "Software Engineer",        budget: 15000, tags: ["Early Bird", "Clean"],     topMatch: false },
-              { name: "Priya S., 23",  role: "MBA Student",              budget: 10000, tags: ["Vegetarian", "Neat"],      topMatch: false },
-            ].map((person) => (
-              <div key={person.name} className="card-listing group rounded-2xl border bg-card overflow-hidden">
-                {/* Photo placeholder */}
-                <div className="relative h-44 bg-gradient-to-br from-muted to-muted/60 flex items-center justify-center overflow-hidden">
-                  <Users className="h-16 w-16 text-muted-foreground/40" />
-                  {person.topMatch && (
-                    <span className="absolute top-3 left-3 rounded-full bg-[color:var(--ai)] px-2.5 py-0.5 text-[11px] font-bold text-white shadow">
-                      Top Match
-                    </span>
-                  )}
-                </div>
-                <div className="p-4">
-                  <p className="font-semibold text-sm">{person.name}</p>
-                  <p className="text-xs text-muted-foreground mt-0.5 mb-3">{person.role}</p>
-                  <div className="flex flex-wrap gap-1.5 mb-4">
-                    {person.tags.map((tag) => (
-                      <span key={tag} className="rounded-full border border-border bg-muted px-2.5 py-0.5 text-[11px] font-medium text-muted-foreground">
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm font-bold text-primary">NPR {person.budget.toLocaleString()}/mo</span>
-                    <button aria-label="Message" className="btn-primary-motion flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground shadow-sm">
-                      <MessageSquare className="h-4 w-4" />
-                    </button>
-                  </div>
-                </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 items-stretch">
+            {FEATURED_ROOMMATES.map((roommate, i) => (
+              <div
+                key={roommate.id}
+                className="flex animate-in fade-in slide-in-from-bottom-3 duration-300 fill-mode-both"
+                style={{ animationDelay: `${i * 60}ms` }}
+              >
+                <RoommateCard roommate={roommate} equalHeight className="w-full" />
               </div>
             ))}
           </div>
@@ -616,29 +570,15 @@ export default function LandingPage() {
             </Link>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {[
-              { title: "Luxury Apartment, Lazimpat", price: 15000, badge: "Verified",  badgeColor: "var(--primary)",  bg: "from-primary/40"    },
-              { title: "Modern Studio, Thamel",      price: 25000, badge: "Trending",  badgeColor: "var(--warning)",  bg: "from-warning/40"    },
-              { title: "Cozy Room, Chabahil",        price: 7500,  badge: "Verified",  badgeColor: "var(--primary)",  bg: "from-primary/40"    },
-            ].map((room) => (
-              <Link key={room.title} href="/listings" className="card-listing group relative rounded-2xl overflow-hidden min-h-[200px] flex items-end">
-                <div className={`absolute inset-0 bg-gradient-to-t ${room.bg} to-muted/60`} />
-                <div className="absolute inset-0 bg-muted flex items-center justify-center">
-                  <Home className="h-16 w-16 text-muted-foreground/30" />
-                </div>
-                {/* Badge */}
-                <span
-                  className="absolute top-3 left-3 rounded-full px-2.5 py-0.5 text-[11px] font-bold text-white shadow"
-                  style={{ backgroundColor: room.badgeColor }}
-                >
-                  {room.badge}
-                </span>
-                {/* Price pill */}
-                <div className="relative m-3 rounded-xl bg-background/95 backdrop-blur-sm px-3 py-2 shadow">
-                  <span className="text-sm font-bold">NPR {room.price.toLocaleString()}</span>
-                </div>
-              </Link>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 items-stretch">
+            {PREMIUM_ROOMS.map((listing, i) => (
+              <div
+                key={listing.id}
+                className="flex animate-in fade-in slide-in-from-bottom-3 duration-300 fill-mode-both"
+                style={{ animationDelay: `${i * 60}ms` }}
+              >
+                <RoomCard listing={listing} equalHeight className="w-full" />
+              </div>
             ))}
           </div>
         </div>

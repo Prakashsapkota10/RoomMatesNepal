@@ -1,18 +1,13 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { Search, SlidersHorizontal, MapPin, Home, Grid3X3, List } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Badge } from "@/components/ui/badge";
-import { Card, CardContent } from "@/components/ui/card";
 import { buildMeta } from "@/lib/metadata";
-import { LISTING_TYPES, FURNISHING_TYPES, NEPAL_CITIES } from "@/lib/constants";
+import { ListingsContent } from "./listings-content";
 
 export const metadata: Metadata = buildMeta({
   title: "Browse Room Listings",
   description: "Browse verified room listings, apartments, PGs, and hostels across Nepal.",
 });
 
+<<<<<<< HEAD
 interface SearchParams {
   q?: string;
   city?: string;
@@ -165,4 +160,8 @@ export default async function ListingsPage({
       </div>
     </div>
   );
+=======
+export default function ListingsPage() {
+  return <ListingsContent />;
+>>>>>>> cbaa3b84ae58cba8ffb7aacdd264e5bd082589e8
 }
