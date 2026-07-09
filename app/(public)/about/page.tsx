@@ -41,7 +41,7 @@ const VALUES = [
 
 export default function AboutPage() {
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col page-enter">
       {/* Hero */}
       <section className="py-20 lg:py-28 bg-muted/30">
         <div className="container mx-auto px-4 lg:px-8 max-w-4xl text-center">
@@ -93,8 +93,8 @@ export default function AboutPage() {
             <h2 className="text-2xl lg:text-3xl font-bold">What We Stand For</h2>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
-            {VALUES.map(({ icon: Icon, title, desc }) => (
-              <Card key={title}>
+              {VALUES.map(({ icon: Icon, title, desc }) => (
+              <Card key={title} className="card-dashboard">
                 <CardContent className="p-6 flex flex-col gap-3">
                   <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10">
                     <Icon className="h-5 w-5 text-primary" />
@@ -117,7 +117,7 @@ export default function AboutPage() {
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-3xl mx-auto">
             {TEAM.map((member) => (
-              <div key={member.name} className="flex flex-col items-center text-center gap-3">
+              <div key={member.name} className="card-listing flex flex-col items-center text-center gap-3 rounded-2xl p-4 border">
                 <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10 text-primary font-bold text-xl">
                   {member.avatar}
                 </div>
@@ -144,7 +144,7 @@ export default function AboutPage() {
               { value: "3.5K+", label: "Listings" },
               { value: "25+", label: "Cities" },
             ].map((s) => (
-              <div key={s.label} className="flex flex-col gap-1">
+              <div key={s.label} className="card-dashboard stat-shimmer relative flex flex-col gap-1 rounded-xl p-4 border">
                 <span className="text-2xl font-bold">{s.value}</span>
                 <span className="text-sm text-muted-foreground">{s.label}</span>
               </div>

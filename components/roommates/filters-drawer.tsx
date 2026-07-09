@@ -141,12 +141,12 @@ function FiltersForm({ draft, onChange, onApply, onClear, immediate = false }: F
   return (
     <div className="flex flex-col gap-0">
       {/* ── Location ─────────────────────────────────────────────────── */}
-      <div className="space-y-2 px-5 py-4">
-        <Label className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+      <div className="space-y-2 px-4 py-3">
+        <Label className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
           Location
         </Label>
-        <Select value={draft.location} onValueChange={(v) => update({ location: v })}>
-          <SelectTrigger className="input-container h-9 text-sm">
+        <Select value={draft.location} onValueChange={(v) => update({ location: v ?? "all" })}>
+          <SelectTrigger className="input-container h-8 text-xs">
             <SelectValue placeholder="Select location" />
           </SelectTrigger>
           <SelectContent>
@@ -163,13 +163,13 @@ function FiltersForm({ draft, onChange, onApply, onClear, immediate = false }: F
       <Separator />
 
       {/* ── Budget ───────────────────────────────────────────────────── */}
-      <div className="space-y-3 px-5 py-4">
-        <Label className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-          Budget Range (NPR/month)
+      <div className="space-y-2 px-4 py-3">
+        <Label className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+          Budget (NPR/month)
         </Label>
-        <div className="flex items-center justify-between text-sm">
+        <div className="flex items-center justify-between text-xs">
           <span className="font-bold text-primary">{draft.budgetMin.toLocaleString()}</span>
-          <span className="text-muted-foreground text-xs">to</span>
+          <span className="text-muted-foreground">—</span>
           <span className="font-bold text-primary">{draft.budgetMax.toLocaleString()}</span>
         </div>
         <Slider
@@ -177,7 +177,7 @@ function FiltersForm({ draft, onChange, onApply, onClear, immediate = false }: F
           min={0}
           max={50000}
           step={1000}
-          onValueChange={([min, max]) => update({ budgetMin: min, budgetMax: max })}
+          onValueChange={(v) => { const arr = Array.isArray(v) ? v : [v]; update({ budgetMin: arr[0], budgetMax: arr[1] ?? arr[0] }); }}
           className="py-1"
         />
       </div>
@@ -185,20 +185,20 @@ function FiltersForm({ draft, onChange, onApply, onClear, immediate = false }: F
       <Separator />
 
       {/* ── Gender ───────────────────────────────────────────────────── */}
-      <div className="space-y-3 px-5 py-4">
-        <Label className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-          Gender Preference
+      <div className="space-y-2 px-4 py-3">
+        <Label className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+          Gender
         </Label>
         <RadioGroup
           value={draft.gender}
           onValueChange={(v) => update({ gender: v })}
-          className="grid grid-cols-3 gap-2"
+          className="flex gap-2"
         >
           {(["any", "male", "female"] as const).map((g) => (
             <Label
               key={g}
               htmlFor={`gender-${g}`}
-              className="flex cursor-pointer items-center justify-center rounded-lg border px-3 py-2 text-xs font-medium transition-colors has-[[data-state=checked]]:border-primary has-[[data-state=checked]]:bg-primary/8 has-[[data-state=checked]]:text-primary"
+              className="flex-1 flex cursor-pointer items-center justify-center rounded-md border px-2 py-1.5 text-xs font-medium transition-colors has-[[data-state=checked]]:border-primary has-[[data-state=checked]]:bg-primary/8 has-[[data-state=checked]]:text-primary"
             >
               <RadioGroupItem value={g} id={`gender-${g}`} className="sr-only" />
               {g === "any" ? "Any" : g.charAt(0).toUpperCase() + g.slice(1)}
@@ -210,11 +210,11 @@ function FiltersForm({ draft, onChange, onApply, onClear, immediate = false }: F
       <Separator />
 
       {/* ── Occupation ───────────────────────────────────────────────── */}
-      <div className="space-y-3 px-5 py-4">
-        <Label className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+      <div className="space-y-2 px-4 py-3">
+        <Label className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
           Occupation
         </Label>
-        <div className="space-y-2">
+        <div className="space-y-1.5">
           {OCCUPATION_TYPES.map((occ) => (
             <div key={occ.id} className="flex items-center gap-2">
               <Checkbox
@@ -222,7 +222,7 @@ function FiltersForm({ draft, onChange, onApply, onClear, immediate = false }: F
                 checked={draft.occupation.includes(occ.id)}
                 onCheckedChange={() => toggleOccupation(occ.id)}
               />
-              <Label htmlFor={`occ-${occ.id}`} className="text-sm font-normal cursor-pointer">
+              <Label htmlFor={`occ-${occ.id}`} className="text-xs font-normal cursor-pointer leading-none">
                 {occ.label}
               </Label>
             </div>
@@ -233,11 +233,11 @@ function FiltersForm({ draft, onChange, onApply, onClear, immediate = false }: F
       <Separator />
 
       {/* ── Lifestyle ────────────────────────────────────────────────── */}
-      <div className="space-y-3 px-5 py-4">
-        <Label className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+      <div className="space-y-2 px-4 py-3">
+        <Label className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
           Lifestyle
         </Label>
-        <div className="grid grid-cols-2 gap-x-4 gap-y-2">
+        <div className="flex flex-col gap-1.5">
           {LIFESTYLE_OPTIONS.map((opt) => (
             <div key={opt.id} className="flex items-center gap-2">
               <Checkbox
@@ -247,7 +247,7 @@ function FiltersForm({ draft, onChange, onApply, onClear, immediate = false }: F
                   toggleLifestyle(opt.id as keyof RoommateFilters["lifestyle"])
                 }
               />
-              <Label htmlFor={`ls-${opt.id}`} className="text-sm font-normal cursor-pointer">
+              <Label htmlFor={`ls-${opt.id}`} className="text-xs font-normal cursor-pointer leading-none">
                 {opt.label}
               </Label>
             </div>
@@ -257,29 +257,10 @@ function FiltersForm({ draft, onChange, onApply, onClear, immediate = false }: F
 
       <Separator />
 
-      {/* ── Move-in Date ─────────────────────────────────────────────── */}
-      <div className="space-y-2 px-5 py-4">
-        <Label
-          htmlFor="move-in-date"
-          className="text-xs font-semibold uppercase tracking-wide text-muted-foreground"
-        >
-          Move-in Date
-        </Label>
-        <input
-          id="move-in-date"
-          type="date"
-          value={draft.moveInDate}
-          onChange={(e) => update({ moveInDate: e.target.value })}
-          className="input-container flex h-9 w-full rounded-lg border bg-background px-3 py-2 text-sm outline-none"
-        />
-      </div>
-
-      <Separator />
-
       {/* ── Verified Only ────────────────────────────────────────────── */}
-      <div className="flex items-center justify-between px-5 py-4">
-        <Label htmlFor="verified-only" className="cursor-pointer text-sm">
-          Verified Users Only
+      <div className="flex items-center justify-between px-4 py-3">
+        <Label htmlFor="verified-only" className="cursor-pointer text-xs">
+          Verified Only
         </Label>
         <Switch
           id="verified-only"
@@ -291,13 +272,13 @@ function FiltersForm({ draft, onChange, onApply, onClear, immediate = false }: F
       <Separator />
 
       {/* ── Min Trust Score ──────────────────────────────────────────── */}
-      <div className="space-y-3 px-5 py-4">
+      <div className="space-y-2 px-4 py-3">
         <div className="flex items-center justify-between">
-          <Label className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-            Min Trust Score
+          <Label className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+            Trust Score
           </Label>
-          <span className="text-sm font-bold" style={{ color: "var(--trust)" }}>
-            {draft.minTrustScore}/100
+          <span className="text-xs font-bold text-primary">
+            {draft.minTrustScore}+
           </span>
         </div>
         <Slider
@@ -305,7 +286,7 @@ function FiltersForm({ draft, onChange, onApply, onClear, immediate = false }: F
           min={0}
           max={100}
           step={10}
-          onValueChange={([v]) => update({ minTrustScore: v })}
+          onValueChange={(v) => { const arr = Array.isArray(v) ? v : [v]; update({ minTrustScore: arr[0] }); }}
           className="py-1"
         />
       </div>
@@ -313,13 +294,13 @@ function FiltersForm({ draft, onChange, onApply, onClear, immediate = false }: F
       <Separator />
 
       {/* ── Min Compatibility ────────────────────────────────────────── */}
-      <div className="space-y-3 px-5 py-4">
+      <div className="space-y-2 px-4 py-3">
         <div className="flex items-center justify-between">
-          <Label className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-            Min Compatibility
+          <Label className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+            Compatibility
           </Label>
-          <span className="text-sm font-bold" style={{ color: "var(--ai)" }}>
-            {draft.minCompatibility}%
+          <span className="text-xs font-bold text-primary">
+            {draft.minCompatibility}%+
           </span>
         </div>
         <Slider
@@ -327,7 +308,7 @@ function FiltersForm({ draft, onChange, onApply, onClear, immediate = false }: F
           min={0}
           max={100}
           step={5}
-          onValueChange={([v]) => update({ minCompatibility: v })}
+          onValueChange={(v) => { const arr = Array.isArray(v) ? v : [v]; update({ minCompatibility: arr[0] }); }}
           className="py-1"
         />
       </div>
@@ -335,12 +316,12 @@ function FiltersForm({ draft, onChange, onApply, onClear, immediate = false }: F
       <Separator />
 
       {/* ── Sort By ──────────────────────────────────────────────────── */}
-      <div className="space-y-2 px-5 py-4">
-        <Label className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+      <div className="space-y-2 px-4 py-3">
+        <Label className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
           Sort By
         </Label>
-        <Select value={draft.sortBy} onValueChange={(v) => update({ sortBy: v })}>
-          <SelectTrigger className="input-container h-9 text-sm">
+        <Select value={draft.sortBy} onValueChange={(v) => update({ sortBy: v ?? "newest" })}>
+          <SelectTrigger className="input-container h-8 text-xs">
             <SelectValue />
           </SelectTrigger>
           <SelectContent>
@@ -360,13 +341,22 @@ function FiltersForm({ draft, onChange, onApply, onClear, immediate = false }: F
 
 export function FiltersDrawer({ filters, onFiltersChange, onClearFilters }: FiltersDrawerProps) {
   /**
-   * Desktop: keep a local "draft" so the grid only re-renders on Apply,
-   * not on every slider tick.
+   * Use the parent filters as the single source of truth.
+   * Changes apply immediately on both mobile and desktop.
    */
   const [draft, setDraft] = useState<RoommateFilters>(filters);
 
-  const handleApply = () => {
-    onFiltersChange(draft);
+  // Sync draft when parent resets filters (e.g. clearFilters)
+  const parentKey = JSON.stringify(filters);
+  const [lastParentKey, setLastParentKey] = useState(parentKey);
+  if (parentKey !== lastParentKey) {
+    setDraft(filters);
+    setLastParentKey(parentKey);
+  }
+
+  const handleChange = (d: RoommateFilters) => {
+    setDraft(d);
+    onFiltersChange(d);
   };
 
   const handleClear = () => {
@@ -379,11 +369,9 @@ export function FiltersDrawer({ filters, onFiltersChange, onClearFilters }: Filt
       {/* ── Mobile: bottom Sheet ─────────────────────────────────────── */}
       <div className="lg:hidden">
         <Sheet>
-          <SheetTrigger asChild>
-            <Button variant="outline" className="btn-secondary-motion gap-2 w-full rounded-xl">
-              <SlidersHorizontal className="h-4 w-4" />
-              Filters &amp; Sort
-            </Button>
+          <SheetTrigger className="btn-secondary-motion group/button inline-flex shrink-0 items-center justify-center gap-2 w-full rounded-xl border border-border bg-background px-4 py-2 text-sm font-medium whitespace-nowrap transition-all hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50">
+            <SlidersHorizontal className="h-4 w-4" />
+            Filters &amp; Sort
           </SheetTrigger>
           <SheetContent side="left" className="w-full sm:max-w-md p-0 flex flex-col">
             <SheetHeader className="px-5 py-4 border-b shrink-0">
@@ -394,14 +382,10 @@ export function FiltersDrawer({ filters, onFiltersChange, onClearFilters }: Filt
             </SheetHeader>
 
             <ScrollArea className="flex-1">
-              {/* In mobile sheet we apply immediately on each change */}
               <FiltersForm
                 draft={draft}
-                onChange={(d) => {
-                  setDraft(d);
-                  onFiltersChange(d);
-                }}
-                onApply={() => onFiltersChange(draft)}
+                onChange={handleChange}
+                onApply={() => {}}
                 onClear={handleClear}
                 immediate
               />
@@ -417,13 +401,6 @@ export function FiltersDrawer({ filters, onFiltersChange, onClearFilters }: Filt
                 <X className="h-3.5 w-3.5 mr-1.5" />
                 Clear All
               </Button>
-              <Button
-                className="btn-primary-motion flex-1 rounded-xl text-sm font-semibold"
-                onClick={handleApply}
-              >
-                <Filter className="h-3.5 w-3.5 mr-1.5" />
-                Apply Filters
-              </Button>
             </div>
           </SheetContent>
         </Sheet>
@@ -432,22 +409,21 @@ export function FiltersDrawer({ filters, onFiltersChange, onClearFilters }: Filt
       {/* ── Desktop: sticky card sidebar ─────────────────────────────── */}
       <div className="hidden lg:block">
         <div className="sticky top-20">
-          {/* Card wrapper — all filters live inside one rounded card */}
-          <div className="rounded-2xl border bg-card shadow-sm overflow-hidden flex flex-col max-h-[calc(100vh-96px)]">
+          <div className="rounded-2xl border bg-card shadow-sm overflow-hidden flex flex-col max-h-[calc(100vh-120px)]">
 
             {/* Card header */}
-            <div className="shrink-0 flex items-center justify-between px-5 py-4 border-b">
+            <div className="shrink-0 flex items-center justify-between px-4 py-3 border-b bg-muted/30">
               <div className="flex items-center gap-2">
-                <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-primary/10">
+                <div className="flex h-6 w-6 items-center justify-center rounded-md bg-primary/10">
                   <SlidersHorizontal className="h-3.5 w-3.5 text-primary" />
                 </div>
-                <h3 className="font-bold text-sm">Filters &amp; Sort</h3>
+                <h3 className="font-semibold text-sm">Filters</h3>
               </div>
               <button
                 onClick={handleClear}
-                className="text-xs text-muted-foreground hover:text-foreground transition-colors duration-150 font-medium"
+                className="text-xs text-primary hover:underline font-medium"
               >
-                Clear All
+                Reset
               </button>
             </div>
 
@@ -455,22 +431,12 @@ export function FiltersDrawer({ filters, onFiltersChange, onClearFilters }: Filt
             <ScrollArea className="flex-1 min-h-0">
               <FiltersForm
                 draft={draft}
-                onChange={setDraft}
-                onApply={handleApply}
+                onChange={handleChange}
+                onApply={() => {}}
                 onClear={handleClear}
+                immediate
               />
             </ScrollArea>
-
-            {/* Sticky Apply button — always visible at bottom of card */}
-            <div className="shrink-0 border-t bg-card/95 backdrop-blur-sm px-5 py-4">
-              <Button
-                onClick={handleApply}
-                className="btn-primary-motion w-full rounded-xl font-semibold gap-2"
-              >
-                <Filter className="h-4 w-4" />
-                Apply Filters
-              </Button>
-            </div>
           </div>
         </div>
       </div>

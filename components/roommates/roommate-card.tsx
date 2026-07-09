@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 import {
   MapPin,
   Briefcase,
@@ -18,6 +19,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
+import { SPRING_SNAPPY } from "@/lib/motion";
 
 export interface RoommateData {
   id: string;
@@ -73,8 +75,18 @@ export function RoommateCard({
   };
 
   const compatibilityBadge = getCompatibilityBadge(roommate.compatibilityScore);
+  const shouldReduceMotion = useReducedMotion();
+
+  // Physics-based hover variants
+  const cardMotion = shouldReduceMotion
+    ? {}
+    : {
+        whileHover: { y: -6, scale: 1.015, transition: SPRING_SNAPPY },
+        whileTap: { scale: 0.98, transition: { type: "spring" as const, stiffness: 600, damping: 30 } },
+      };
 
   return (
+    <motion.div {...cardMotion}>
     <Card
       className={cn(
         "card-listing group relative overflow-hidden",
@@ -120,17 +132,20 @@ export function RoommateCard({
           </div>
 
           {/* Bookmark */}
-          <button
+          <motion.button
             onClick={() => setIsSaved((v) => !v)}
             className="btn-primary-motion absolute bottom-3 right-3 flex h-9 w-9 items-center justify-center rounded-full bg-background/90 backdrop-blur-sm shadow-md transition-colors hover:bg-background"
             aria-label={isSaved ? "Remove bookmark" : "Bookmark"}
+            whileTap={{ scale: 0.75 }}
+            animate={isSaved ? { scale: [1, 1.3, 1] } : { scale: 1 }}
+            transition={{ type: "spring", stiffness: 500, damping: 15 }}
           >
             {isSaved ? (
               <BookmarkCheck className="h-4 w-4 fill-primary text-primary" />
             ) : (
               <Bookmark className="h-4 w-4 text-muted-foreground" />
             )}
-          </button>
+          </motion.button>
         </div>
       </div>
 
@@ -243,5 +258,6 @@ export function RoommateCard({
         </div>
       </div>
     </Card>
+    </motion.div>
   );
 }

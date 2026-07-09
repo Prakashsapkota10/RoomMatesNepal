@@ -50,7 +50,7 @@ const BILLING_FAQS = [
 
 export default function PricingPage() {
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col page-enter">
       {/* Header */}
       <section className="py-16 lg:py-24 bg-muted/30 text-center">
         <div className="container mx-auto px-4 lg:px-8 max-w-3xl">
@@ -71,7 +71,7 @@ export default function PricingPage() {
             {SUBSCRIPTION_PLANS.map((plan) => (
               <Card
                 key={plan.id}
-                className={plan.highlighted ? "ring-2 ring-primary relative" : ""}
+                className={plan.highlighted ? "card-ai-match ring-2 ring-primary relative" : "card-listing"}
               >
                 {plan.highlighted && (
                   <div className="absolute -top-3 left-1/2 -translate-x-1/2">
@@ -109,7 +109,7 @@ export default function PricingPage() {
                   >
                     <Button
                       variant={plan.highlighted ? "default" : "outline"}
-                      className="w-full"
+                      className={plan.highlighted ? "btn-primary-motion w-full" : "btn-secondary-motion w-full"}
                     >
                       {plan.price === 0 ? "Get Started Free" : `Start Free Trial`}
                     </Button>

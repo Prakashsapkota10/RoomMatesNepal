@@ -50,7 +50,7 @@ export default async function ProfilePage() {
   };
 
   return (
-    <div className="flex flex-col gap-6 max-w-3xl">
+    <div className="flex flex-col gap-6 max-w-3xl page-enter">
       {/* Profile card */}
       <Card>
         <CardContent className="p-6">
@@ -87,7 +87,7 @@ export default async function ProfilePage() {
                   </div>
                 </div>
                 <Link href="/profile/edit">
-                  <Button variant="outline" size="sm" className="gap-2 shrink-0">
+                  <Button variant="outline" size="sm" className="btn-secondary-motion gap-2 shrink-0">
                     <Pencil className="h-3.5 w-3.5" />
                     Edit Profile
                   </Button>
@@ -119,31 +119,31 @@ export default async function ProfilePage() {
 
       {/* Stats row */}
       <div className="grid grid-cols-3 gap-4">
-        <Card>
-          <CardContent className="p-4 text-center">
-            <p className="text-2xl font-bold">{user.activeListings}</p>
-            <p className="text-xs text-muted-foreground mt-0.5">Active Listings</p>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardContent className="p-4 text-center">
-            <div className="flex items-center justify-center gap-1">
-              <Star className="h-4 w-4 fill-primary text-primary" />
-              <p className="text-2xl font-bold">{user.avgRating}</p>
-            </div>
-            <p className="text-xs text-muted-foreground mt-0.5">{user.totalReviews} Reviews</p>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardContent className="p-4 text-center">
-            <p className={`text-2xl font-bold ${getTrustColor(user.trustScore)}`}>
-              {user.trustScore}
-            </p>
-            <p className="text-xs text-muted-foreground mt-0.5">
-              {getTrustLabel(user.trustScore)} Trust
-            </p>
-          </CardContent>
-        </Card>
+        <Card className="card-dashboard">
+              <CardContent className="p-4 text-center">
+                <p className="text-2xl font-bold">{user.activeListings}</p>
+                <p className="text-xs text-muted-foreground mt-0.5">Active Listings</p>
+              </CardContent>
+            </Card>
+            <Card className="card-dashboard">
+              <CardContent className="p-4 text-center">
+                <div className="flex items-center justify-center gap-1">
+                  <Star className="h-4 w-4 fill-primary text-primary" />
+                  <p className="text-2xl font-bold">{user.avgRating}</p>
+                </div>
+                <p className="text-xs text-muted-foreground mt-0.5">{user.totalReviews} Reviews</p>
+              </CardContent>
+            </Card>
+            <Card className="card-dashboard">
+              <CardContent className="p-4 text-center">
+                <p className={`text-2xl font-bold ${getTrustColor(user.trustScore)}`}>
+                  {user.trustScore}
+                </p>
+                <p className="text-xs text-muted-foreground mt-0.5">
+                  {getTrustLabel(user.trustScore)} Trust
+                </p>
+              </CardContent>
+            </Card>
       </div>
 
       {/* Trust score details */}
@@ -201,7 +201,7 @@ export default async function ProfilePage() {
           { label: "My Reviews", href: "/profile/reviews", icon: Star, desc: "See what others say about you" },
         ].map(({ label, href, icon: Icon, desc }) => (
           <Link key={label} href={href}>
-            <Card className="hover:border-primary/50 hover:shadow-sm transition-all">
+            <Card className="card-listing">
               <CardContent className="p-4 flex items-center gap-3">
                 <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10 shrink-0">
                   <Icon className="h-4 w-4 text-primary" />

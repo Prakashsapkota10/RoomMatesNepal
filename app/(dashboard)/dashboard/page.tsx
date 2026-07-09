@@ -81,7 +81,7 @@ export default async function DashboardPage() {
   const session = await verifySession();
 
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-6 page-enter">
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div>
@@ -91,8 +91,8 @@ export default async function DashboardPage() {
           </p>
         </div>
         <div className="flex gap-2">
-          <Link href="/listings/create">
-            <Button size="sm" className="gap-2">
+              <Link href="/listings/create">
+                <Button size="sm" className="btn-primary-motion gap-2">
               <Home className="h-4 w-4" />
               Post a Room
             </Button>
@@ -185,8 +185,8 @@ export default async function DashboardPage() {
             color: "text-green-500",
           },
         ].map(({ label, value, icon: Icon, href, color }) => (
-          <Link key={label} href={href}>
-            <Card className="hover:border-primary/50 hover:shadow-sm transition-all">
+              <Link key={label} href={href}>
+                <Card className="card-dashboard stat-shimmer relative">
               <CardContent className="p-4 flex flex-col gap-2">
                 <div className="flex items-center justify-between">
                   <span className="text-xs text-muted-foreground">{label}</span>
@@ -312,7 +312,7 @@ export default async function DashboardPage() {
               { label: "Received Apps", icon: Inbox, href: "/applications/received", desc: "Review applicants" },
             ].map(({ label, icon: Icon, href, desc }) => (
               <Link key={label} href={href}>
-                <div className="flex flex-col items-center gap-2 rounded-xl border p-4 text-center hover:border-primary hover:bg-accent transition-all">
+                <div className="card-listing flex flex-col items-center gap-2 rounded-xl border p-4 text-center">
                   <Icon className="h-6 w-6 text-primary" />
                   <div>
                     <p className="text-sm font-medium">{label}</p>

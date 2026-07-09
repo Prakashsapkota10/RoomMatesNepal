@@ -456,4 +456,103 @@
     background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.15) 50%, transparent 100%);
     animation: shimmerSlide 2s ease-in-out 1.2s 1 both;
   }
+
+  /* ── Staggered entrance for grids of cards/items ──────────────────── */
+  /* Apply .stagger to the container; each child fades/slides up in turn. */
+  .stagger > * {
+    animation: staggerIn var(--motion-page) var(--ease-smooth) both;
+    animation-delay: calc(var(--stagger-i, 0) * 60ms);
+  }
+  @keyframes staggerIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0);    }
+  }
+
+  /* ── Soft icon pop on entrance ────────────────────────────────────── */
+  .icon-pop {
+    animation: iconPop var(--motion-modal) var(--ease-spring) both;
+  }
+  @keyframes iconPop {
+    from { opacity: 0; transform: scale(0.6); }
+    to   { opacity: 1; transform: scale(1);   }
+  }
+
+  /* ── Success/info icon: pop in then gently pulse (ring-pulse style) ─ */
+  .icon-ping {
+    animation: iconPop var(--motion-modal) var(--ease-spring) both;
+  }
+  .icon-ping > * {
+    animation: pulseRing 2.5s ease-in-out infinite;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   REDUCED MOTION — accessibility
+   Honours the user's OS "reduce motion" preference: disables all entrance
+   animations, loops, and transitions app-wide while preserving visibility.
+   ═══════════════════════════════════════════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   SKELETON SHIMMER — loading state animation
+   ═══════════════════════════════════════════════════════════════════════════ */
+@layer components {
+  .skeleton-shimmer {
+    position: relative;
+    overflow: hidden;
+    background: var(--muted);
+    border-radius: 0.5rem;
+  }
+  .skeleton-shimmer::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.08) 20%,
+      rgba(255, 255, 255, 0.15) 50%,
+      rgba(255, 255, 255, 0.08) 80%,
+      transparent 100%
+    );
+    animation: skeleton-sweep 1.8s ease-in-out infinite;
+    transform: translateX(-100%);
+  }
+  @keyframes skeleton-sweep {
+    0%   { transform: translateX(-100%); }
+    100% { transform: translateX(100%);  }
+  }
+
+  /* ── Focus gradient border sweep (inputs) ─────────────────────────── */
+  .input-focus-gradient {
+    position: relative;
+  }
+  .input-focus-gradient::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    background: linear-gradient(90deg, var(--primary) 0%, var(--trust, var(--primary)) 50%, var(--primary) 100%);
+    background-size: 200% 100%;
+    opacity: 0;
+    z-index: -1;
+    transition: opacity 200ms ease;
+  }
+  .input-focus-gradient:focus-within::before {
+    opacity: 1;
+    animation: gradient-sweep 2s ease-in-out infinite;
+  }
+  @keyframes gradient-sweep {
+    0%   { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
 }

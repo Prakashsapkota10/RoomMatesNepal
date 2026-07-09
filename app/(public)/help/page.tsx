@@ -140,7 +140,7 @@ const FAQS_BY_CATEGORY = [
 
 export default function HelpPage() {
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col page-enter">
       {/* Hero */}
       <section className="py-16 lg:py-20 bg-muted/30">
         <div className="container mx-auto px-4 lg:px-8 max-w-3xl text-center">
@@ -149,7 +149,7 @@ export default function HelpPage() {
           <p className="text-muted-foreground text-lg mb-8">
             Find answers fast. Search our guides or browse by topic.
           </p>
-          <div className="flex items-center gap-2 rounded-xl border bg-background px-4 py-2.5 shadow-sm">
+              <div className="input-container flex items-center gap-2 rounded-xl border bg-background px-4 py-2.5 shadow-sm">
             <Search className="h-4 w-4 text-muted-foreground shrink-0" />
             <input
               type="text"
@@ -168,7 +168,7 @@ export default function HelpPage() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-4xl mx-auto">
             {CATEGORIES.map(({ icon: Icon, title, desc, href, articles }) => (
               <a key={title} href={href}>
-                <Card className="hover:border-primary hover:shadow-sm transition-all group">
+                <Card className="card-listing group">
                   <CardContent className="p-5 flex items-start gap-4">
                     <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/10">
                       <Icon className="h-5 w-5 text-primary" />
@@ -226,10 +226,10 @@ export default function HelpPage() {
             Our support team is available Sunday–Friday, 9AM–6PM NPT.
           </p>
           <Link href="/contact">
-            <button className="inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-colors">
-              Contact Support
-              <ChevronRight className="h-4 w-4" />
-            </button>
+              <button className="btn-primary-motion inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-colors">
+                Contact Support
+                <ChevronRight className="h-4 w-4" />
+              </button>
           </Link>
         </div>
       </section>

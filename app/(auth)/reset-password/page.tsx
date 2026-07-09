@@ -23,9 +23,9 @@ export default async function ResetPasswordPage({ searchParams }: ResetPasswordP
   // If no token in query, show an error state
   if (!token) {
     return (
-      <Card>
+      <Card className="modal-enter">
         <CardContent className="p-8 text-center flex flex-col gap-4">
-          <KeyRound className="h-10 w-10 text-destructive mx-auto" />
+          <KeyRound className="icon-pop h-10 w-10 text-destructive mx-auto" />
           <div>
             <h2 className="font-semibold text-lg">Invalid Reset Link</h2>
             <p className="text-sm text-muted-foreground mt-1">
@@ -33,7 +33,7 @@ export default async function ResetPasswordPage({ searchParams }: ResetPasswordP
             </p>
           </div>
           <Link href="/forgot-password">
-            <Button className="w-full">Request a new link</Button>
+            <Button className="btn-primary-motion w-full">Request a new link</Button>
           </Link>
         </CardContent>
       </Card>
@@ -42,9 +42,9 @@ export default async function ResetPasswordPage({ searchParams }: ResetPasswordP
 
   return (
     <div className="flex flex-col gap-6">
-      <Card>
+      <Card className="modal-enter">
         <CardHeader className="text-center">
-          <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 mx-auto mb-2">
+          <div className="icon-pop flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 mx-auto mb-2">
             <KeyRound className="h-6 w-6 text-primary" />
           </div>
           <CardTitle className="text-2xl">Set a new password</CardTitle>
@@ -85,7 +85,7 @@ export default async function ResetPasswordPage({ searchParams }: ResetPasswordP
               />
             </div>
 
-            <Button type="submit" className="w-full mt-2">
+            <Button type="submit" className="btn-primary-motion w-full mt-2">
               Reset Password
             </Button>
           </form>
@@ -94,7 +94,7 @@ export default async function ResetPasswordPage({ searchParams }: ResetPasswordP
 
       <Link
         href="/login"
-        className="flex items-center justify-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
+        className="nav-link flex items-center justify-center gap-2 text-sm text-muted-foreground hover:text-primary"
       >
         <ArrowLeft className="h-4 w-4" />
         Back to Sign In

@@ -11,7 +11,7 @@ const LAST_UPDATED = "January 1, 2025";
 
 export default function PrivacyPolicyPage() {
   return (
-    <div className="py-12 lg:py-20">
+    <div className="py-12 lg:py-20 page-enter">
       <div className="container mx-auto px-4 lg:px-8 max-w-3xl">
         <div className="mb-10">
           <h1 className="text-3xl lg:text-4xl font-bold mb-2">Privacy Policy</h1>

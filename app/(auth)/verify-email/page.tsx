@@ -21,9 +21,9 @@ export default async function VerifyEmailPage({ searchParams }: VerifyEmailPageP
   // State: already verified
   if (verified === "true") {
     return (
-      <Card>
+      <Card className="modal-enter">
         <CardContent className="p-8 text-center flex flex-col items-center gap-5">
-          <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
+          <div className="icon-ping flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
             <MailCheck className="h-8 w-8 text-primary" />
           </div>
           <div>
@@ -33,7 +33,7 @@ export default async function VerifyEmailPage({ searchParams }: VerifyEmailPageP
             </p>
           </div>
           <Link href="/dashboard" className="w-full">
-            <Button className="w-full">Go to Dashboard</Button>
+            <Button className="btn-primary-motion w-full">Go to Dashboard</Button>
           </Link>
         </CardContent>
       </Card>
@@ -43,9 +43,9 @@ export default async function VerifyEmailPage({ searchParams }: VerifyEmailPageP
   // State: waiting for verification
   return (
     <div className="flex flex-col gap-6">
-      <Card>
+      <Card className="modal-enter">
         <CardContent className="p-8 text-center flex flex-col items-center gap-5">
-          <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
+          <div className="icon-ping flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
             <MailCheck className="h-8 w-8 text-primary" />
           </div>
 
@@ -64,7 +64,7 @@ export default async function VerifyEmailPage({ searchParams }: VerifyEmailPageP
             {/* Resend action — wire to Server Action */}
             <form action="#">
               {email && <input type="hidden" name="email" value={email} />}
-              <Button type="submit" variant="outline" className="w-full gap-2">
+              <Button type="submit" variant="outline" className="btn-secondary-motion w-full gap-2">
                 <RefreshCw className="h-4 w-4" />
                 Resend Verification Email
               </Button>

@@ -1,10 +1,9 @@
-import Link from "next/link";
-import { Sparkles } from "lucide-react";
-import { APP_NAME } from "@/lib/constants";
+import { TopNav } from "@/components/navigation/public-nav";
+import { PublicFooter } from "@/components/navigation/public-footer";
 
 /**
- * AuthLayout — centred card layout for login, register, etc.
- * No sidebar or header nav — clean focus on the auth form.
+ * AuthLayout — uses the full public nav + footer so the auth pages
+ * match the rest of the site (matches the design screenshot).
  */
 export default function AuthLayout({
   children,
@@ -12,33 +11,12 @@ export default function AuthLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex min-h-screen flex-col bg-muted/30">
-      {/* Minimal header */}
-      <header className="flex h-14 items-center px-6 border-b bg-background">
-        <Link href="/" className="flex items-center gap-2 font-bold text-lg">
-          <div className="flex h-7 w-7 items-center justify-center rounded-md bg-primary text-primary-foreground">
-            <Sparkles className="h-3.5 w-3.5" />
-          </div>
-          {APP_NAME}
-        </Link>
-      </header>
-
-      {/* Centered form area */}
-      <main className="flex flex-1 items-center justify-center px-4 py-12">
-        <div className="w-full max-w-md">{children}</div>
+    <div className="flex min-h-screen flex-col">
+      <TopNav isAuthenticated={false} />
+      <main className="flex flex-1 items-center justify-center px-4 py-12 mt-14 bg-muted/30">
+        <div className="w-full max-w-5xl">{children}</div>
       </main>
-
-      {/* Minimal footer */}
-      <footer className="border-t bg-background py-4 text-center text-xs text-muted-foreground">
-        &copy; {new Date().getFullYear()} {APP_NAME} &mdash;{" "}
-        <Link href="/privacy-policy" className="underline-offset-2 hover:underline">
-          Privacy
-        </Link>{" "}
-        &middot;{" "}
-        <Link href="/terms" className="underline-offset-2 hover:underline">
-          Terms
-        </Link>
-      </footer>
+      <PublicFooter />
     </div>
   );
 }

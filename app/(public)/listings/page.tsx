@@ -43,12 +43,12 @@ export default async function ListingsPage({
   const params = await searchParams;
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen page-enter">
       {/* Search & Filters Bar */}
       <div className="sticky top-16 z-40 border-b bg-background/95 backdrop-blur py-3">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="flex flex-col sm:flex-row gap-3">
-            <div className="flex flex-1 items-center gap-2 rounded-lg border bg-background px-3">
+            <div className="input-container flex flex-1 items-center gap-2 rounded-lg border bg-background px-3">
               <Search className="h-4 w-4 text-muted-foreground shrink-0" />
               <input
                 type="text"
@@ -77,7 +77,7 @@ export default async function ListingsPage({
                   <option key={t.value} value={t.value}>{t.label}</option>
                 ))}
               </select>
-              <Button variant="outline" size="sm" className="gap-2 shrink-0">
+              <Button variant="outline" size="sm" className="btn-secondary-motion gap-2 shrink-0">
                 <SlidersHorizontal className="h-4 w-4" />
                 <span className="hidden sm:inline">Filters</span>
               </Button>
@@ -107,8 +107,8 @@ export default async function ListingsPage({
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
           {MOCK_LISTINGS.map((listing) => (
             <Link key={listing.id} href={`/listings/${listing.id}`}>
-              <Card className="group hover:shadow-md transition-shadow overflow-hidden h-full">
-                <div className="h-44 bg-muted flex items-center justify-center relative">
+              <Card className="card-listing group overflow-hidden h-full">
+                <div className="img-hover h-44 bg-muted flex items-center justify-center relative">
                   <Home className="h-12 w-12 text-muted-foreground/40" />
                   {listing.isVerified && (
                     <Badge className="absolute top-2 left-2 text-xs gap-1 py-0.5">
@@ -154,13 +154,13 @@ export default async function ListingsPage({
 
         {/* Pagination */}
         <div className="flex justify-center gap-2 mt-10">
-          <Button variant="outline" size="sm" disabled>Previous</Button>
+          <Button variant="outline" size="sm" className="btn-secondary-motion" disabled>Previous</Button>
           {[1, 2, 3].map((p) => (
-            <Button key={p} variant={p === 1 ? "default" : "outline"} size="sm">
+            <Button key={p} variant={p === 1 ? "default" : "outline"} size="sm" className={p === 1 ? "btn-primary-motion" : "btn-secondary-motion"}>
               {p}
             </Button>
           ))}
-          <Button variant="outline" size="sm">Next</Button>
+          <Button variant="outline" size="sm" className="btn-secondary-motion">Next</Button>
         </div>
       </div>
     </div>

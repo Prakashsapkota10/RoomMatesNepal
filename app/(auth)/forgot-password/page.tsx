@@ -16,9 +16,9 @@ export const metadata: Metadata = buildMeta({
 export default function ForgotPasswordPage() {
   return (
     <div className="flex flex-col gap-6">
-      <Card>
+      <Card className="modal-enter">
         <CardHeader className="text-center">
-          <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 mx-auto mb-2">
+          <div className="icon-pop flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 mx-auto mb-2">
             <Mail className="h-6 w-6 text-primary" />
           </div>
           <CardTitle className="text-2xl">Forgot your password?</CardTitle>
@@ -40,7 +40,7 @@ export default function ForgotPasswordPage() {
                 required
               />
             </div>
-            <Button type="submit" className="w-full gap-2 mt-1">
+            <Button type="submit" className="btn-primary-motion w-full gap-2 mt-1">
               Send Reset Link
             </Button>
           </form>
@@ -49,7 +49,7 @@ export default function ForgotPasswordPage() {
 
       <Link
         href="/login"
-        className="flex items-center justify-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
+        className="nav-link flex items-center justify-center gap-2 text-sm text-muted-foreground hover:text-primary"
       >
         <ArrowLeft className="h-4 w-4" />
         Back to Sign In

@@ -41,7 +41,7 @@ const CONTACT_INFO = [
 
 export default function ContactPage() {
   return (
-    <div className="py-16 lg:py-24">
+    <div className="py-16 lg:py-24 page-enter">
       <div className="container mx-auto px-4 lg:px-8 max-w-5xl">
         {/* Header */}
         <div className="text-center mb-12">
@@ -53,7 +53,7 @@ export default function ContactPage() {
 
         <div className="grid lg:grid-cols-2 gap-10">
           {/* Contact form */}
-          <Card>
+          <Card className="modal-enter">
             <CardContent className="p-6 lg:p-8">
               <h2 className="text-xl font-semibold mb-6">Send a Message</h2>
               {/* 
@@ -102,7 +102,7 @@ export default function ContactPage() {
                     required
                   />
                 </div>
-                <Button type="submit" className="w-full sm:w-auto">
+                <Button type="submit" className="btn-primary-motion w-full sm:w-auto">
                   Send Message
                 </Button>
               </form>
@@ -120,7 +120,7 @@ export default function ContactPage() {
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-1 gap-4">
               {CONTACT_INFO.map(({ icon: Icon, label, value, href }) => (
-                <div key={label} className="flex items-start gap-3 p-4 rounded-xl border bg-card">
+                <div key={label} className="card-dashboard flex items-start gap-3 p-4 rounded-xl border bg-card">
                   <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary/10">
                     <Icon className="h-4 w-4 text-primary" />
                   </div>
@@ -153,7 +153,7 @@ export default function ContactPage() {
                   Browse our Help Center for guides, tutorials, and FAQs.
                 </p>
                 <a href="/help">
-                  <Button variant="outline" size="sm">
+                  <Button variant="outline" size="sm" className="btn-secondary-motion">
                     Visit Help Center
                   </Button>
                 </a>
