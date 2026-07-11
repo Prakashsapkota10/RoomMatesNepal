@@ -9,6 +9,10 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  typescript: {
+    // Ensure TS errors are caught during build (matches Vercel behavior)
+    ignoreBuildErrors: false,
+  },
 };
 
 export default nextConfig;
