@@ -1,219 +1,324 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import {
   Pencil,
-  ShieldCheck,
-  Star,
+  Share2,
   MapPin,
-  Calendar,
-  Mail,
-  Phone,
-  ExternalLink,
+  Camera,
+  CheckCircle2,
+  Circle,
+  Lock,
+  Info,
+  DollarSign,
+  Moon as MoonIcon,
+  Ban,
+  PawPrint,
+  UtensilsCrossed,
 } from "lucide-react";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Separator } from "@/components/ui/separator";
 import { Progress } from "@/components/ui/progress";
 import { verifySession } from "@/lib/auth";
 import { buildMeta } from "@/lib/metadata";
-import { getTrustColor, getTrustLabel } from "@/lib/utils";
 
 export const metadata: Metadata = buildMeta({ title: "My Profile", noIndex: true });
 
-export default async function ProfilePage() {
-  await verifySession();
+// ─── Data Fetching — replace with real DB/API queries ─────────────────────────
 
-  // TODO: replace with real user fetch
-  const user = {
-    name: "Ram Shrestha",
-    email: "ram@example.com",
+/**
+ * Fetch user profile data.
+ * TODO: Replace with: await db.user.findUnique({ where: { id: userId }, include: { ... } })
+ */
+async function getProfileData(_userId: string) {
+  return {
+    name: "Arjun Prajapati",
+    email: "arjun@example.com",
     phone: "+977 9801234567",
     avatar: null as string | null,
-    bio: "Software engineer by day, book reader by night. Looking for a quiet, clean flatmate in Kathmandu. Non-smoker, no pets.",
-    location: "Kathmandu",
-    joinedAt: "2024-03-15",
-    isEmailVerified: true,
-    isPhoneVerified: false,
-    isIdVerified: false,
-    trustScore: 72,
-    role: "tenant" as const,
-    totalReviews: 6,
-    avgRating: 4.5,
-    activeListings: 2,
+    coverImage: "https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=900&q=80",
+    location: "Kathmandu, Nepal",
+    isPremium: true,
+    isVerified: true,
+    bio: "I'm a software engineer working remotely for a tech firm. I value a clean workspace and a quiet environment during the day. I enjoy weekend treks and occasional cooking sessions. Looking for someone respectful, tidy, and career-focused to share a premium flat in the Sanepa or Jhamsikhel area.",
+    budget: { min: 15000, max: 25000, note: "Flexible for prime locations" },
+    sleepSchedule: { type: "Night Owl", activeHours: "11 PM — 8 AM" },
+    lifestyle: [
+      { label: "No Smoking", icon: "ban" },
+      { label: "Pet Friendly", icon: "paw" },
+      { label: "Vegetarian Preferred", icon: "utensils" },
+    ],
+    profileCompletion: 85,
+    profileViews: 124,
+    totalSaves: 48,
+    verifications: {
+      phone: true,
+      govtId: true,
+      linkedin: false,
+      socialMedia: false,
+    },
   };
+}
+
+// ─── Lifestyle Icon Resolver ──────────────────────────────────────────────────
+
+function LifestyleIcon({ type }: { type: string }) {
+  switch (type) {
+    case "ban":
+      return <Ban className="h-4 w-4" />;
+    case "paw":
+      return <PawPrint className="h-4 w-4" />;
+    case "utensils":
+      return <UtensilsCrossed className="h-4 w-4" />;
+    default:
+      return null;
+  }
+}
+
+// ─── Page Component ───────────────────────────────────────────────────────────
+
+export default async function ProfilePage() {
+  const session = await verifySession();
+  const profile = await getProfileData(session.userId);
 
   return (
-    <div className="flex flex-col gap-6 max-w-3xl page-enter">
-      {/* Profile card */}
-      <Card>
-        <CardContent className="p-6">
-          <div className="flex flex-col sm:flex-row gap-5 items-start">
-            <div className="relative">
-              <Avatar className="h-20 w-20">
-                <AvatarImage src={user.avatar ?? undefined} />
-                <AvatarFallback className="text-xl font-bold">
-                  {user.name.charAt(0)}
-                </AvatarFallback>
-              </Avatar>
-              {user.isIdVerified && (
-                <span className="absolute -bottom-1 -right-1 flex h-6 w-6 items-center justify-center rounded-full bg-primary text-primary-foreground">
-                  <ShieldCheck className="h-3.5 w-3.5" />
-                </span>
-              )}
-            </div>
+    <div className="flex flex-col gap-6 page-enter">
+      {/* Page heading */}
+      <h1 className="text-lg font-bold text-primary">Profile Management</h1>
 
-            <div className="flex-1 min-w-0">
-              <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
-                <div>
-                  <h1 className="text-xl font-bold">{user.name}</h1>
-                  <div className="flex flex-wrap items-center gap-2 mt-1">
-                    <Badge variant="secondary" className="capitalize text-xs">
-                      {user.role}
-                    </Badge>
-                    <span className="flex items-center gap-1 text-xs text-muted-foreground">
-                      <MapPin className="h-3 w-3" /> {user.location}
-                    </span>
-                    <span className="flex items-center gap-1 text-xs text-muted-foreground">
-                      <Calendar className="h-3 w-3" />
-                      Joined {new Date(user.joinedAt).toLocaleDateString("en-NP", { month: "long", year: "numeric" })}
-                    </span>
-                  </div>
-                </div>
-                <Link href="/profile/edit">
-                  <Button variant="outline" size="sm" className="btn-secondary-motion gap-2 shrink-0">
-                    <Pencil className="h-3.5 w-3.5" />
-                    Edit Profile
-                  </Button>
-                </Link>
-              </div>
+      {/* ── Cover Photo + Avatar Hero ──────────────────────────────── */}
+      <div className="relative">
+        {/* Cover image */}
+        <div className="relative h-44 sm:h-56 rounded-xl overflow-hidden bg-muted">
+          <Image
+            src={profile.coverImage}
+            alt="Profile cover"
+            fill
+            className="object-cover"
+            priority
+          />
+          {/* Watermark */}
+          <span className="absolute bottom-4 right-4 text-white/40 text-sm font-bold tracking-wider select-none">
+            ROOMMATE NEPAL
+          </span>
+          {/* Edit cover button */}
+          <Button
+            variant="secondary"
+            size="sm"
+            className="absolute top-3 right-3 gap-1.5 bg-white/80 dark:bg-card/80 backdrop-blur-sm text-xs font-medium"
+          >
+            <Camera className="h-3.5 w-3.5" />
+            Edit Cover
+          </Button>
+        </div>
 
-              <p className="text-sm text-muted-foreground mt-3 leading-relaxed">{user.bio}</p>
-
-              <div className="flex flex-wrap gap-4 mt-4 text-sm">
-                <span className="flex items-center gap-1.5">
-                  <Mail className="h-4 w-4 text-muted-foreground" />
-                  {user.email}
-                  {user.isEmailVerified && (
-                    <Badge variant="secondary" className="text-xs py-0">Verified</Badge>
-                  )}
-                </span>
-                <span className="flex items-center gap-1.5">
-                  <Phone className="h-4 w-4 text-muted-foreground" />
-                  {user.phone}
-                  {!user.isPhoneVerified && (
-                    <Badge variant="outline" className="text-xs py-0 text-orange-500">Unverified</Badge>
-                  )}
-                </span>
-              </div>
-            </div>
+        {/* Avatar — overlapping bottom-left */}
+        <div className="absolute -bottom-10 left-5 sm:left-8">
+          <div className="relative">
+            <Avatar className="h-24 w-24 ring-4 ring-background">
+              <AvatarImage src={profile.avatar ?? undefined} />
+              <AvatarFallback className="text-2xl font-bold bg-primary/10 text-primary">
+                {profile.name.charAt(0)}
+              </AvatarFallback>
+            </Avatar>
+            {profile.isVerified && (
+              <span className="absolute bottom-0 right-0 h-7 w-7 rounded-full bg-success flex items-center justify-center ring-3 ring-background">
+                <CheckCircle2 className="h-4 w-4 text-white" />
+              </span>
+            )}
           </div>
-        </CardContent>
-      </Card>
-
-      {/* Stats row */}
-      <div className="grid grid-cols-3 gap-4">
-        <Card className="card-dashboard">
-              <CardContent className="p-4 text-center">
-                <p className="text-2xl font-bold">{user.activeListings}</p>
-                <p className="text-xs text-muted-foreground mt-0.5">Active Listings</p>
-              </CardContent>
-            </Card>
-            <Card className="card-dashboard">
-              <CardContent className="p-4 text-center">
-                <div className="flex items-center justify-center gap-1">
-                  <Star className="h-4 w-4 fill-primary text-primary" />
-                  <p className="text-2xl font-bold">{user.avgRating}</p>
-                </div>
-                <p className="text-xs text-muted-foreground mt-0.5">{user.totalReviews} Reviews</p>
-              </CardContent>
-            </Card>
-            <Card className="card-dashboard">
-              <CardContent className="p-4 text-center">
-                <p className={`text-2xl font-bold ${getTrustColor(user.trustScore)}`}>
-                  {user.trustScore}
-                </p>
-                <p className="text-xs text-muted-foreground mt-0.5">
-                  {getTrustLabel(user.trustScore)} Trust
-                </p>
-              </CardContent>
-            </Card>
+        </div>
       </div>
 
-      {/* Trust score details */}
-      <Card>
-        <CardHeader className="pb-3">
-          <div className="flex items-center justify-between">
-            <CardTitle className="text-base flex items-center gap-2">
-              <ShieldCheck className="h-4 w-4 text-primary" />
-              Trust Score Breakdown
-            </CardTitle>
-            <Link href="/profile/verification">
-              <Button variant="ghost" size="sm" className="gap-1 text-xs">
-                Verify ID <ExternalLink className="h-3 w-3" />
-              </Button>
-            </Link>
-          </div>
-        </CardHeader>
-        <CardContent className="p-4 pt-0 flex flex-col gap-3">
-          {[
-            { label: "Email Verified", points: 20, done: user.isEmailVerified },
-            { label: "Profile Complete", points: 20, done: true },
-            { label: "Phone Verified", points: 15, done: user.isPhoneVerified },
-            { label: "ID Document Uploaded", points: 25, done: user.isIdVerified },
-            { label: "Received 5+ Reviews", points: 20, done: user.totalReviews >= 5 },
-          ].map((item) => (
-            <div key={item.label} className="flex items-center gap-3">
-              <div
-                className={`h-4 w-4 rounded-full flex items-center justify-center shrink-0 ${
-                  item.done ? "bg-primary" : "bg-muted border"
-                }`}
-              >
-                {item.done && (
-                  <svg className="h-2.5 w-2.5 text-primary-foreground" fill="none" viewBox="0 0 12 12">
-                    <path d="M2 6l3 3 5-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                )}
-              </div>
-              <span className={`flex-1 text-sm ${item.done ? "" : "text-muted-foreground"}`}>
-                {item.label}
-              </span>
-              <Badge variant={item.done ? "default" : "outline"} className="text-xs">
-                +{item.points} pts
+      {/* ── Name + Actions row ─────────────────────────────────────── */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mt-8 sm:mt-6 pl-1">
+        <div>
+          <div className="flex items-center gap-2">
+            <h2 className="text-xl font-bold text-foreground">{profile.name}</h2>
+            {profile.isPremium && (
+              <Badge className="text-[10px] bg-primary/10 text-primary border-0 font-semibold">
+                Premium
               </Badge>
-            </div>
-          ))}
-        </CardContent>
-      </Card>
+            )}
+          </div>
+          <span className="flex items-center gap-1 text-sm text-muted-foreground mt-0.5">
+            <MapPin className="h-3.5 w-3.5" />
+            {profile.location}
+          </span>
+        </div>
+        <div className="flex items-center gap-2">
+          <Link href="/profile/edit">
+            <Button size="sm" className="btn-primary-motion gap-1.5 font-semibold">
+              <Pencil className="h-3.5 w-3.5" />
+              Edit Profile
+            </Button>
+          </Link>
+          <Button variant="outline" size="sm" className="btn-secondary-motion h-8 w-8 p-0" aria-label="Share profile">
+            <Share2 className="h-4 w-4" />
+          </Button>
+        </div>
+      </div>
 
-      {/* Profile links */}
-      <div className="grid sm:grid-cols-2 gap-3">
-        {[
-          { label: "Edit Profile", href: "/profile/edit", icon: Pencil, desc: "Update your info and bio" },
-          { label: "Lifestyle Preferences", href: "/profile/preferences", icon: Star, desc: "Improve AI match quality" },
-          { label: "Verification", href: "/profile/verification", icon: ShieldCheck, desc: "Upload ID documents" },
-          { label: "My Reviews", href: "/profile/reviews", icon: Star, desc: "See what others say about you" },
-        ].map(({ label, href, icon: Icon, desc }) => (
-          <Link key={label} href={href}>
-            <Card className="card-listing">
-              <CardContent className="p-4 flex items-center gap-3">
-                <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10 shrink-0">
-                  <Icon className="h-4 w-4 text-primary" />
+      {/* ── Tab Navigation ─────────────────────────────────────────── */}
+      <div className="border-b">
+        <nav className="flex gap-6 overflow-x-auto">
+          {["Personal Info", "Living Preferences", "Verification", "Privacy", "Analytics"].map((tab, i) => (
+            <button
+              key={tab}
+              className={`pb-2.5 text-sm font-medium whitespace-nowrap transition-colors border-b-2 ${
+                i === 0
+                  ? "border-primary text-foreground"
+                  : "border-transparent text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              {tab}
+            </button>
+          ))}
+        </nav>
+      </div>
+
+      {/* ── Main Content: Left (Info) + Right (Analytics Sidebar) ─── */}
+      <div className="grid lg:grid-cols-[1fr_280px] gap-6">
+        {/* Left column — Personal Info tab content */}
+        <div className="flex flex-col gap-5">
+          {/* Budget + Sleep Schedule cards */}
+          <div className="grid sm:grid-cols-2 gap-4">
+            {/* Monthly Budget */}
+            <Card className="card-dashboard">
+              <CardContent className="p-5">
+                <div className="flex items-center justify-between mb-3">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10">
+                    <DollarSign className="h-4.5 w-4.5 text-primary" />
+                  </div>
+                  <Button variant="ghost" size="icon-xs" aria-label="Edit budget">
+                    <Pencil className="h-3.5 w-3.5 text-muted-foreground" />
+                  </Button>
                 </div>
-                <div className="min-w-0">
-                  <p className="text-sm font-medium">{label}</p>
-                  <p className="text-xs text-muted-foreground">{desc}</p>
-                </div>
+                <p className="text-xs text-muted-foreground font-medium">Monthly Budget</p>
+                <p className="text-base font-bold text-foreground mt-0.5">
+                  Rs. {profile.budget.min.toLocaleString()} – {profile.budget.max.toLocaleString()}
+                </p>
+                <p className="text-xs text-muted-foreground mt-1">{profile.budget.note}</p>
               </CardContent>
             </Card>
-          </Link>
-        ))}
+
+            {/* Sleep Schedule */}
+            <Card className="card-dashboard">
+              <CardContent className="p-5">
+                <div className="flex items-center justify-between mb-3">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-ai-light">
+                    <MoonIcon className="h-4.5 w-4.5 text-ai" />
+                  </div>
+                  <Button variant="ghost" size="icon-xs" aria-label="Edit schedule">
+                    <Pencil className="h-3.5 w-3.5 text-muted-foreground" />
+                  </Button>
+                </div>
+                <p className="text-xs text-muted-foreground font-medium">Sleep Schedule</p>
+                <p className="text-base font-bold text-foreground mt-0.5">{profile.sleepSchedule.type}</p>
+                <p className="text-xs text-muted-foreground mt-1">Active {profile.sleepSchedule.activeHours}</p>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Lifestyle badges */}
+          <div className="flex flex-wrap gap-3">
+            {profile.lifestyle.map((item) => (
+              <div
+                key={item.label}
+                className="flex items-center gap-2 px-4 py-2.5 rounded-lg bg-card ring-1 ring-foreground/5 text-sm font-medium text-foreground"
+              >
+                <span className="text-primary">
+                  <LifestyleIcon type={item.icon} />
+                </span>
+                {item.label}
+              </div>
+            ))}
+          </div>
+
+          {/* Bio & Living Style */}
+          <Card>
+            <CardContent className="p-5">
+              <h3 className="text-sm font-bold text-foreground mb-3">Bio & Living Style</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                {profile.bio}
+              </p>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Right column — Profile Analytics & Trust */}
+        <aside className="flex flex-col gap-5">
+          {/* Profile Analytics */}
+          <Card>
+            <CardContent className="p-4">
+              <h3 className="text-sm font-bold text-foreground mb-4">Profile Analytics</h3>
+
+              {/* Stats row */}
+              <div className="grid grid-cols-2 gap-3 mb-4">
+                <div className="text-center p-3 rounded-lg bg-muted/50">
+                  <p className="text-2xl font-bold text-primary">{profile.profileViews}</p>
+                  <p className="text-[10px] text-muted-foreground uppercase tracking-wide mt-0.5">Profile Views</p>
+                </div>
+                <div className="text-center p-3 rounded-lg bg-muted/50">
+                  <p className="text-2xl font-bold text-primary">{profile.totalSaves}</p>
+                  <p className="text-[10px] text-muted-foreground uppercase tracking-wide mt-0.5">Total Saves</p>
+                </div>
+              </div>
+
+              {/* Profile completion */}
+              <div className="flex items-center justify-between text-xs mb-1.5">
+                <span className="text-muted-foreground font-medium">Profile Completion</span>
+                <span className="font-bold text-foreground">{profile.profileCompletion}%</span>
+              </div>
+              <Progress value={profile.profileCompletion} className="h-2" />
+            </CardContent>
+          </Card>
+
+          {/* Trust & Verification */}
+          <Card>
+            <CardContent className="p-4">
+              <h3 className="text-sm font-bold text-foreground mb-4">Trust & Verification</h3>
+              <div className="flex flex-col gap-3">
+                {[
+                  { label: "Phone Verified", done: profile.verifications.phone },
+                  { label: "Govt ID Uploaded", done: profile.verifications.govtId },
+                  { label: "LinkedIn Connect", done: profile.verifications.linkedin, action: "Verify" },
+                  { label: "Social Media", done: profile.verifications.socialMedia, action: "Verify" },
+                ].map((item) => (
+                  <div key={item.label} className="flex items-center gap-2.5">
+                    {item.done ? (
+                      <CheckCircle2 className="h-4.5 w-4.5 text-success shrink-0" />
+                    ) : (
+                      <Circle className="h-4.5 w-4.5 text-muted-foreground/40 shrink-0" />
+                    )}
+                    <span className={`flex-1 text-sm ${item.done ? "text-foreground" : "text-muted-foreground"}`}>
+                      {item.label}
+                    </span>
+                    {!item.done && item.action && (
+                      <Button variant="ghost" size="xs" className="text-primary text-xs font-medium h-auto p-0">
+                        {item.action}
+                      </Button>
+                    )}
+                    {!item.done && !item.action && (
+                      <Lock className="h-3.5 w-3.5 text-muted-foreground/40" />
+                    )}
+                  </div>
+                ))}
+              </div>
+
+              {/* Verification CTA */}
+              <div className="mt-4 p-3 rounded-lg bg-muted/50 flex items-start gap-2">
+                <Info className="h-4 w-4 text-muted-foreground shrink-0 mt-0.5" />
+                <p className="text-[11px] text-muted-foreground leading-snug">
+                  Complete all verifications to boost your Trust Score by{" "}
+                  <span className="font-bold text-primary">+25 points</span>.
+                </p>
+              </div>
+            </CardContent>
+          </Card>
+        </aside>
       </div>
     </div>
   );
