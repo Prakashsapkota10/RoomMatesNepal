@@ -29,9 +29,13 @@ import {
   CollapsibleContent,
 } from "@/components/ui/collapsible";
 import { Separator } from "@/components/ui/separator";
-import { APP_NAME, USER_SIDEBAR_NAV } from "@/lib/constants";
+import { APP_NAME } from "@/lib/constants";
 import { cn } from "@/lib/utils";
-import type { NavItem, UserRole } from "@/types";
+import { getSidebarNavForRole } from "@/lib/sidebar.config";
+import type { SidebarNavItem } from "@/lib/sidebar.config";
+import type { UserRole } from "@/types";
+
+// ─── Props ────────────────────────────────────────────────────────────────────
 
 interface DashboardSidebarProps {
   userName: string;
@@ -43,54 +47,53 @@ interface DashboardSidebarProps {
   unreadNotifications?: number;
 }
 
+// ─── Icon Resolver ────────────────────────────────────────────────────────────
+
 function NavIcon({ name }: { name: string }) {
   const Icon = (Icons as unknown as Record<string, LucideIcon>)[name];
   if (!Icon) return null;
   return <Icon className="h-4 w-4 shrink-0" />;
 }
 
+// ─── Single Nav Item Row ──────────────────────────────────────────────────────
+
 function NavItemRow({
   item,
-  role,
   unreadMessages,
   unreadNotifications,
 }: {
-  item: NavItem;
-  role: UserRole;
+  item: SidebarNavItem;
   unreadMessages?: number;
   unreadNotifications?: number;
 }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(() =>
-    item.children?.some((c) => pathname.startsWith(c.href)) ?? false
+    item.children?.some((c) => pathname.startsWith(c.href.split("?")[0])) ?? false
   );
-
-  // Role-gated items
-  if (item.roles && !item.roles.includes(role)) return null;
 
   const isActive =
     pathname === item.href ||
-    (item.href !== "/" && pathname.startsWith(item.href));
+    (item.href !== "/dashboard" && pathname.startsWith(item.href));
 
   const badge =
-    item.href === "/messages"
+    item.badgeKey === "messages"
       ? unreadMessages
-      : item.href === "/notifications"
+      : item.badgeKey === "notifications"
       ? unreadNotifications
       : undefined;
 
+  // Collapsible item with children
   if (item.children) {
     return (
       <Collapsible open={open} onOpenChange={setOpen}>
         <SidebarMenuItem>
-          {/* CollapsibleTrigger renders a <button> — wrap it with SidebarMenuButton styling */}
           <CollapsibleTrigger
             render={
               <SidebarMenuButton isActive={isActive} className="w-full justify-between" />
             }
           >
             <span className="flex items-center gap-2">
-              {item.icon && <NavIcon name={item.icon} />}
+              <NavIcon name={item.icon} />
               {item.label}
             </span>
             <ChevronRight
@@ -105,7 +108,7 @@ function NavItemRow({
               {item.children.map((child) => (
                 <SidebarMenuSubItem key={child.href}>
                   <SidebarMenuSubButton
-                    isActive={pathname === child.href}
+                    isActive={pathname === child.href.split("?")[0]}
                     render={<Link href={child.href} />}
                   >
                     {child.icon && <NavIcon name={child.icon} />}
@@ -120,11 +123,12 @@ function NavItemRow({
     );
   }
 
+  // Flat item
   return (
     <SidebarMenuItem>
       <SidebarMenuButton isActive={isActive} render={<Link href={item.href} />}>
         <span className="flex items-center gap-2">
-          {item.icon && <NavIcon name={item.icon} />}
+          <NavIcon name={item.icon} />
           {item.label}
         </span>
         {badge && badge > 0 && (
@@ -137,6 +141,8 @@ function NavItemRow({
   );
 }
 
+// ─── Main Sidebar Component ───────────────────────────────────────────────────
+
 export function DashboardSidebar({
   userName,
   userEmail,
@@ -146,6 +152,9 @@ export function DashboardSidebar({
   unreadMessages = 0,
   unreadNotifications = 0,
 }: DashboardSidebarProps) {
+  // Get navigation items filtered by role permissions
+  const navItems = getSidebarNavForRole(userRole);
+
   return (
     <Sidebar>
       {/* Header */}
@@ -164,11 +173,10 @@ export function DashboardSidebar({
           <SidebarGroupLabel>Navigation</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              {USER_SIDEBAR_NAV.map((item) => (
+              {navItems.map((item) => (
                 <NavItemRow
-                  key={item.href}
+                  key={`${item.permission}-${item.href}`}
                   item={item}
-                  role={userRole}
                   unreadMessages={unreadMessages}
                   unreadNotifications={unreadNotifications}
                 />

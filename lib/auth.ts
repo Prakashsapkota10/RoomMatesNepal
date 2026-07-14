@@ -4,16 +4,21 @@ import type { Session, UserRole } from "@/types";
 
 /**
  * Decrypt / verify session from cookie.
- * Replace with your real JWT/jose implementation.
+ * Currently uses base64 encoding — replace with real JWT/jose in production.
  */
 export async function decrypt(token: string): Promise<Session | null> {
   try {
-    // TODO: Replace with real jose/JWT verification
-    // import { jwtVerify } from "jose"
-    // const { payload } = await jwtVerify(token, encodedKey, { algorithms: ["HS256"] })
-    // return payload as Session
-    void token;
-    return null;
+    // TODO: Replace with real jose/JWT verification in production
+    const decoded = JSON.parse(
+      Buffer.from(token, "base64").toString("utf-8")
+    ) as Session;
+
+    // Check if session has expired
+    if (new Date(decoded.expiresAt) < new Date()) {
+      return null;
+    }
+
+    return decoded;
   } catch {
     return null;
   }

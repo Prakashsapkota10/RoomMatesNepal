@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { PlusCircle, Share2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SearchBar } from "./search-bar";
@@ -27,14 +28,18 @@ export function CommunityHero({ onSearch, searchValue }: CommunityHeroProps) {
 
           {/* Action Buttons */}
           <div className="flex items-center justify-center gap-3 mt-5">
-            <Button className="gap-2 rounded-full px-6 font-semibold">
-              <PlusCircle className="h-4 w-4" />
-              Ask Question
-            </Button>
-            <Button variant="outline" className="gap-2 rounded-full px-6 font-semibold">
-              <Share2 className="h-4 w-4" />
-              Share Experience
-            </Button>
+            <Link href="/community/new">
+              <Button className="gap-2 rounded-full px-6 font-semibold">
+                <PlusCircle className="h-4 w-4" />
+                Ask Question
+              </Button>
+            </Link>
+            <Link href="/community/new">
+              <Button variant="outline" className="gap-2 rounded-full px-6 font-semibold">
+                <Share2 className="h-4 w-4" />
+                Share Experience
+              </Button>
+            </Link>
           </div>
         </div>
       </div>

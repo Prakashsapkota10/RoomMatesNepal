@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useActionState } from "react";
 import { motion } from "framer-motion";
 import { Eye, EyeOff, User, Lock } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -10,9 +10,11 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import { staggerContainer, fadeUpItem, slideInLeft, slideInRight } from "@/lib/motion";
+import { loginAction } from "./actions";
 
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
+  const [state, formAction, isPending] = useActionState(loginAction, null);
 
   return (
     <motion.div
@@ -65,8 +67,19 @@ export default function LoginPage() {
           </p>
         </motion.div>
 
+        {/* Error message */}
+        {state?.error && (
+          <motion.div
+            className="bg-destructive/10 text-destructive text-sm rounded-lg px-4 py-3 text-center"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+          >
+            {state.error}
+          </motion.div>
+        )}
+
         {/* Form */}
-        <motion.form action="#" className="flex flex-col gap-4" variants={staggerContainer} initial="hidden" animate="visible">
+        <motion.form action={formAction} className="flex flex-col gap-4" variants={staggerContainer} initial="hidden" animate="visible">
           {/* Email / Phone */}
           <motion.div className="flex flex-col gap-1.5" variants={fadeUpItem}>
             <Label htmlFor="identifier" className="text-xs font-medium text-muted-foreground">
@@ -123,8 +136,8 @@ export default function LoginPage() {
 
           {/* Submit */}
           <motion.div variants={fadeUpItem}>
-            <Button type="submit" className="btn-primary-motion w-full gap-2 rounded-lg font-semibold mt-1">
-              Sign In →
+            <Button type="submit" className="btn-primary-motion w-full gap-2 rounded-lg font-semibold mt-1" disabled={isPending}>
+              {isPending ? "Signing in..." : "Sign In →"}
             </Button>
           </motion.div>
         </motion.form>

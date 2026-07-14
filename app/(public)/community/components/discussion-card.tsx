@@ -1,6 +1,7 @@
 "use client";
 
 import { MessageSquare, Bookmark, Share2, BadgeCheck, CheckCircle2 } from "lucide-react";
+import Link from "next/link";
 import type { Discussion } from "../types";
 import { formatDate } from "../utils";
 
@@ -10,7 +11,8 @@ interface DiscussionCardProps {
 
 export function DiscussionCard({ discussion }: DiscussionCardProps) {
   return (
-    <div className="rounded-xl border bg-card p-4">
+    <Link href={`/community/${discussion.id}`} className="block">
+      <div className="rounded-xl border bg-card p-4 hover:border-primary/30 transition-colors">
       <div className="flex gap-3">
         {/* Likes counter / Solved indicator */}
         <div className="flex flex-col items-center shrink-0 pt-1">
@@ -85,5 +87,6 @@ export function DiscussionCard({ discussion }: DiscussionCardProps) {
         </button>
       </div>
     </div>
+    </Link>
   );
 }
