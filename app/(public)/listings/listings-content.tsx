@@ -27,8 +27,7 @@ export function ListingsContent() {
 
   let filtered = MOCK_LISTINGS.filter((listing) => {
     if (filters.verifiedOnly && !listing.isVerified) return false;
-    if (listing.price < filters.priceMin || listing.price > filters.priceMax) return false;
-    if (filters.type !== "all" && listing.type !== filters.type) return false;
+    if (listing.price < filters.budgetMin || listing.price > filters.budgetMax) return false;
     if (filters.gender !== "any" && listing.genderPreference !== filters.gender && listing.genderPreference !== "any") {
       return false;
     }
@@ -38,10 +37,7 @@ export function ListingsContent() {
     if (typeof listing.landlordTrustScore === "number" && listing.landlordTrustScore < filters.minTrustScore) {
       return false;
     }
-    if (filters.minMatchScore > 0 && (!listing.matchScore || listing.matchScore < filters.minMatchScore)) {
-      return false;
-    }
-    if (filters.amenities.length > 0 && !filters.amenities.every((a) => listing.amenities.includes(a))) {
+    if (filters.minCompatibility > 0 && (!listing.matchScore || listing.matchScore < filters.minCompatibility)) {
       return false;
     }
     if (searchQuery) {
@@ -53,7 +49,7 @@ export function ListingsContent() {
     return true;
   });
 
-  if (filters.sortBy === "lowestPrice") {
+  if (filters.sortBy === "lowestBudget" || filters.sortBy === "lowestPrice") {
     filtered = [...filtered].sort((a, b) => a.price - b.price);
   } else if (filters.sortBy === "highestRated") {
     filtered = [...filtered].sort((a, b) => (b.rating ?? 0) - (a.rating ?? 0));
@@ -61,7 +57,7 @@ export function ListingsContent() {
     filtered = [...filtered].sort(
       (a, b) => (b.landlordTrustScore ?? 0) - (a.landlordTrustScore ?? 0)
     );
-  } else if (filters.sortBy === "bestMatch") {
+  } else if (filters.sortBy === "highestMatch" || filters.sortBy === "bestMatch") {
     filtered = [...filtered].sort((a, b) => (b.matchScore ?? 0) - (a.matchScore ?? 0));
   } else {
     filtered = [...filtered].sort(
@@ -123,7 +119,6 @@ export function ListingsContent() {
           {/* Filters Sidebar — same pattern as Roommates page */}
           <aside className="lg:w-80 shrink-0">
             <FiltersDrawer
-              variant="listing"
               filters={filters}
               onFiltersChange={handleFiltersChange}
               onClearFilters={clearFilters}
