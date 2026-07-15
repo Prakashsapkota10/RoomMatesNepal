@@ -346,8 +346,8 @@ export default async function DashboardPage() {
         <h2 className="text-lg font-bold text-foreground mb-3">Quick Actions</h2>
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
           {[
-            { label: "Find Room", desc: "Browse available rooms", icon: Search, href: "/discover", color: "text-brand bg-brand-light" },
-            { label: "Find Roommate", desc: "Match with individuals", icon: Users, href: "/discover", color: "text-ai-dark bg-ai-light" },
+            { label: "Find Room", desc: "Browse available rooms", icon: Search, href: "/explore", color: "text-brand bg-brand-light" },
+            { label: "Find Roommate", desc: "Match with individuals", icon: Users, href: "/explore", color: "text-ai-dark bg-ai-light" },
             { label: "Post Listing", desc: "Rent out your space", icon: Home, href: "/activities", color: "text-foreground bg-muted" },
             { label: "Create Requirement", desc: "Tell us what you need", icon: FileText, href: "/activities", color: "text-community bg-community-light", highlighted: true },
           ].map(({ label, desc, icon: Icon, href, color, highlighted }) => (
@@ -376,13 +376,13 @@ export default async function DashboardPage() {
           <section>
             <div className="flex items-center justify-between mb-3">
               <h2 className="text-lg font-bold text-foreground">Recommended Rooms</h2>
-              <Link href="/discover" className="text-sm text-primary font-medium flex items-center gap-1 hover:underline">
+              <Link href="/explore" className="text-sm text-primary font-medium flex items-center gap-1 hover:underline">
                 See all <ArrowRight className="h-3.5 w-3.5" />
               </Link>
             </div>
             <div className="grid sm:grid-cols-2 gap-4">
               {rooms.map((room) => (
-                <Link key={room.id} href="/discover">
+                <Link key={room.id} href="/explore">
                   <Card className="card-listing overflow-hidden">
                     <div className="relative">
                       <Image

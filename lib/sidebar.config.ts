@@ -8,7 +8,7 @@ import type { UserRole } from "@/types";
  */
 export type SidebarPermission =
   | "dashboard"
-  | "discover"
+  | "explore"
   | "manage_requirements"
   | "manage_listings"
   | "messages"
@@ -26,7 +26,7 @@ export type SidebarPermission =
 const ROLE_PERMISSIONS: Record<UserRole, SidebarPermission[]> = {
   user: [
     "dashboard",
-    "discover",
+    "explore",
     "manage_requirements",
     "messages",
     "saved",
@@ -102,13 +102,13 @@ export const SIDEBAR_NAV: SidebarNavItem[] = [
     permission: "dashboard",
   },
   {
-    label: "Discover",
-    href: "/discover",
+    label: "Explore",
+    href: "/explore",
     icon: "Search",
-    permission: "discover",
+    permission: "explore",
     children: [
-      { label: "Rooms", href: "/discover", icon: "Building2" },
-      { label: "Roommates", href: "/discover?tab=roommates", icon: "Users" },
+      { label: "Rooms", href: "/explore", icon: "Building2" },
+      { label: "Roommates", href: "/explore?tab=roommates", icon: "Users" },
     ],
   },
   {
