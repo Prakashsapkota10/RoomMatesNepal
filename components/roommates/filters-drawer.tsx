@@ -7,24 +7,16 @@ import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
+  Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
 } from "@/components/ui/select";
 import { Slider } from "@/components/ui/slider";
 import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
+  Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger,
 } from "@/components/ui/sheet";
 import { Switch } from "@/components/ui/switch";
 import { Separator } from "@/components/ui/separator";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { NEPAL_CITIES, LISTING_TYPES, FURNISHING_TYPES, AMENITIES_LIST } from "@/lib/constants";
+import { NEPAL_CITIES } from "@/lib/constants";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -58,14 +50,8 @@ export const DEFAULT_FILTERS: RoommateFilters = {
   gender: "any",
   occupation: [],
   lifestyle: {
-    nonSmoker: false,
-    noAlcohol: false,
-    vegetarian: false,
-    petFriendly: false,
-    earlyBird: false,
-    nightOwl: false,
-    clean: false,
-    quiet: false,
+    nonSmoker: false, noAlcohol: false, vegetarian: false, petFriendly: false,
+    earlyBird: false, nightOwl: false, clean: false, quiet: false,
   },
   moveInDate: "",
   verifiedOnly: false,
@@ -74,66 +60,27 @@ export const DEFAULT_FILTERS: RoommateFilters = {
   sortBy: "newest",
 };
 
-export interface ListingFilters {
-  location: string;
-  priceMin: number;
-  priceMax: number;
-  type: string;
-  gender: string;
-  furnishing: string;
-  amenities: string[];
-  verifiedOnly: boolean;
-  minTrustScore: number;
-  minMatchScore: number;
-  sortBy: string;
-}
+// Aliases for listings page compatibility
+export type ListingFilters = RoommateFilters;
+export const DEFAULT_LISTING_FILTERS = DEFAULT_FILTERS;
 
-export const DEFAULT_LISTING_FILTERS: ListingFilters = {
-  location: "all",
-  priceMin: 0,
-  priceMax: 50000,
-  type: "all",
-  gender: "any",
-  furnishing: "all",
-  amenities: [],
-  verifiedOnly: false,
-  minTrustScore: 0,
-  minMatchScore: 0,
-  sortBy: "newest",
-};
-
-interface RoommateFiltersDrawerProps {
-  variant?: "roommate";
+interface FiltersDrawerProps {
   filters: RoommateFilters;
   onFiltersChange: (filters: RoommateFilters) => void;
   onClearFilters: () => void;
 }
 
-interface ListingFiltersDrawerProps {
-  variant: "listing";
-  filters: ListingFilters;
-  onFiltersChange: (filters: ListingFilters) => void;
-  onClearFilters: () => void;
-}
-
-type FiltersDrawerProps = RoommateFiltersDrawerProps | ListingFiltersDrawerProps;
-
-// ─── Static options ───────────────────────────────────────────────────────────
+// ─── Options ──────────────────────────────────────────────────────────────────
 
 const OCCUPATION_TYPES = [
-  { id: "student",       label: "Student" },
-  { id: "it",            label: "IT / Software" },
-  { id: "professional",  label: "Working Professional" },
-  { id: "remote",        label: "Remote Worker" },
-  { id: "healthcare",    label: "Healthcare" },
-  { id: "teacher",       label: "Teacher / Educator" },
-  { id: "business",      label: "Business Owner" },
-  { id: "freelancer",    label: "Freelancer" },
+  { id: "student", label: "Student" },
+  { id: "professional", label: "Professional" },
+  { id: "remote", label: "Remote Worker" },
 ];
 
 const LIFESTYLE_OPTIONS = [
   { id: "nonSmoker", label: "Non-Smoker" },
-  { id: "noAlcohol", label: "Doesn't Drink" },
+  { id: "noAlcohol", label: "No Alcohol" },
   { id: "vegetarian", label: "Vegetarian" },
   { id: "petFriendly", label: "Pet Friendly" },
   { id: "earlyBird", label: "Early Bird" },
@@ -141,16 +88,6 @@ const LIFESTYLE_OPTIONS = [
   { id: "clean", label: "Clean" },
   { id: "quiet", label: "Quiet" },
 ];
-
-const LISTING_SORT_OPTIONS = [
-  { value: "newest", label: "Newest" },
-  { value: "lowestPrice", label: "Lowest Price" },
-  { value: "highestRated", label: "Highest Rated" },
-  { value: "highestTrust", label: "Highest Trust" },
-  { value: "bestMatch", label: "Best Match" },
-];
-
-const LISTING_AMENITIES = AMENITIES_LIST.slice(0, 8);
 
 const SORT_OPTIONS = [
   { value: "newest", label: "Newest" },
@@ -160,6 +97,7 @@ const SORT_OPTIONS = [
   { value: "highestRated", label: "Highest Rated" },
 ];
 
+<<<<<<< HEAD
 // ─── Listing filter form ──────────────────────────────────────────────────────
 
 interface ListingFiltersFormProps {
@@ -408,22 +346,30 @@ function ListingFiltersForm({ draft, onChange, onApply, onClear: _onClear, immed
     </div>
   );
 }
+=======
+// ─── Inner form ───────────────────────────────────────────────────────────────
+>>>>>>> a98fd9f (fix)
 
 // ─── Roommate filter form ─────────────────────────────────────────────────────
 
 interface FiltersFormProps {
   draft: RoommateFilters;
   onChange: (draft: RoommateFilters) => void;
+<<<<<<< HEAD
   onApply: () => void;
   onClear: () => void;
   immediate?: boolean;
 }
 
 function FiltersForm({ draft, onChange, onApply, onClear: _onClear, immediate = false }: FiltersFormProps) {
+=======
+  onClear: () => void;
+}
+
+function FiltersForm({ draft, onChange, onClear }: FiltersFormProps) {
+>>>>>>> a98fd9f (fix)
   const update = (updates: Partial<RoommateFilters>) => {
-    const next = { ...draft, ...updates };
-    onChange(next);
-    if (immediate) onApply();
+    onChange({ ...draft, ...updates });
   };
 
   const toggleOccupation = (id: string) => {
@@ -438,6 +384,7 @@ function FiltersForm({ draft, onChange, onApply, onClear: _onClear, immediate = 
   };
 
   return (
+<<<<<<< HEAD
     <div className="flex flex-col gap-0">
       {/* ── Location ─────────────────────────────────────────────────── */}
       <div className="space-y-1.5 px-4 py-3">
@@ -448,12 +395,18 @@ function FiltersForm({ draft, onChange, onApply, onClear: _onClear, immediate = 
           <SelectTrigger className="input-container h-8 text-sm">
             <SelectValue placeholder="Select location" />
           </SelectTrigger>
+=======
+    <div className="flex flex-col">
+      {/* Location */}
+      <div className="space-y-2 px-4 py-3">
+        <Label className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">Location</Label>
+        <Select value={draft.location} onValueChange={(v) => update({ location: v ?? "all" })}>
+          <SelectTrigger className="h-8 text-xs"><SelectValue placeholder="All Locations" /></SelectTrigger>
+>>>>>>> a98fd9f (fix)
           <SelectContent>
             <SelectItem value="all">All Locations</SelectItem>
             {NEPAL_CITIES.map((city) => (
-              <SelectItem key={city} value={city.toLowerCase()}>
-                {city}
-              </SelectItem>
+              <SelectItem key={city} value={city.toLowerCase()}>{city}</SelectItem>
             ))}
           </SelectContent>
         </Select>
@@ -461,30 +414,35 @@ function FiltersForm({ draft, onChange, onApply, onClear: _onClear, immediate = 
 
       <Separator />
 
-      {/* ── Budget ───────────────────────────────────────────────────── */}
+      {/* Budget */}
       <div className="space-y-2 px-4 py-3">
+<<<<<<< HEAD
         <Label className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
           Budget Range (NPR/month)
         </Label>
         <div className="flex items-center justify-between text-xs">
           <span className="font-bold text-primary">{draft.budgetMin.toLocaleString()}</span>
           <span className="text-muted-foreground">to</span>
+=======
+        <Label className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">Budget (NPR/month)</Label>
+        <div className="flex items-center justify-between text-xs">
+          <span className="font-bold text-primary">{draft.budgetMin.toLocaleString()}</span>
+          <span className="text-muted-foreground">—</span>
+>>>>>>> a98fd9f (fix)
           <span className="font-bold text-primary">{draft.budgetMax.toLocaleString()}</span>
         </div>
         <Slider
           value={[draft.budgetMin, draft.budgetMax]}
-          min={0}
-          max={50000}
-          step={1000}
-          onValueChange={(v) => { const arr = Array.isArray(v) ? v : [v]; update({ budgetMin: arr[0], budgetMax: arr[1] ?? arr[0] }); }}
-          className="py-1"
+          min={0} max={50000} step={1000}
+          onValueChange={(v) => { const a = Array.isArray(v) ? v : [v]; update({ budgetMin: a[0], budgetMax: a[1] ?? a[0] }); }}
         />
       </div>
 
       <Separator />
 
-      {/* ── Gender ───────────────────────────────────────────────────── */}
+      {/* Gender */}
       <div className="space-y-2 px-4 py-3">
+<<<<<<< HEAD
         <Label className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
           Gender Preference
         </Label>
@@ -499,6 +457,12 @@ function FiltersForm({ draft, onChange, onApply, onClear: _onClear, immediate = 
               htmlFor={`gender-${g}`}
               className="flex cursor-pointer items-center justify-center rounded-lg border px-2 py-1.5 text-xs font-medium transition-all duration-150 hover:border-primary/50 has-[[data-state=checked]]:border-primary has-[[data-state=checked]]:bg-primary/8 has-[[data-state=checked]]:text-primary"
             >
+=======
+        <Label className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">Gender</Label>
+        <RadioGroup value={draft.gender} onValueChange={(v) => update({ gender: v })} className="flex gap-2">
+          {(["any", "male", "female"] as const).map((g) => (
+            <Label key={g} htmlFor={`gender-${g}`} className="flex-1 flex cursor-pointer items-center justify-center rounded-md border px-2 py-1.5 text-xs font-medium transition-colors has-[[data-state=checked]]:border-primary has-[[data-state=checked]]:bg-primary/10 has-[[data-state=checked]]:text-primary">
+>>>>>>> a98fd9f (fix)
               <RadioGroupItem value={g} id={`gender-${g}`} className="sr-only" />
               {g === "any" ? "Any" : g.charAt(0).toUpperCase() + g.slice(1)}
             </Label>
@@ -508,6 +472,7 @@ function FiltersForm({ draft, onChange, onApply, onClear: _onClear, immediate = 
 
       <Separator />
 
+<<<<<<< HEAD
       {/* ── Occupation (multi-select checkboxes) ─────────────────────── */}
       <div className="space-y-2 px-4 py-3">
         <Label className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
@@ -532,12 +497,24 @@ function FiltersForm({ draft, onChange, onApply, onClear: _onClear, immediate = 
               />
               {occ.label}
             </Label>
+=======
+      {/* Occupation */}
+      <div className="space-y-2 px-4 py-3">
+        <Label className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">Occupation</Label>
+        <div className="space-y-2">
+          {OCCUPATION_TYPES.map((occ) => (
+            <div key={occ.id} className="flex items-center gap-2">
+              <Checkbox id={`occ-${occ.id}`} checked={draft.occupation.includes(occ.id)} onCheckedChange={() => toggleOccupation(occ.id)} />
+              <Label htmlFor={`occ-${occ.id}`} className="text-xs font-normal cursor-pointer">{occ.label}</Label>
+            </div>
+>>>>>>> a98fd9f (fix)
           ))}
         </div>
       </div>
 
       <Separator />
 
+<<<<<<< HEAD
       {/* ── Lifestyle (all 8 options) ─────────────────────────────────── */}
       <div className="space-y-2 px-4 py-3">
         <Label className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
@@ -564,12 +541,24 @@ function FiltersForm({ draft, onChange, onApply, onClear: _onClear, immediate = 
               />
               {opt.label}
             </Label>
+=======
+      {/* Lifestyle */}
+      <div className="space-y-2 px-4 py-3">
+        <Label className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">Lifestyle</Label>
+        <div className="flex flex-col gap-2">
+          {LIFESTYLE_OPTIONS.map((opt) => (
+            <div key={opt.id} className="flex items-center gap-2">
+              <Checkbox id={`ls-${opt.id}`} checked={draft.lifestyle[opt.id as keyof typeof draft.lifestyle]} onCheckedChange={() => toggleLifestyle(opt.id as keyof RoommateFilters["lifestyle"])} />
+              <Label htmlFor={`ls-${opt.id}`} className="text-xs font-normal cursor-pointer">{opt.label}</Label>
+            </div>
+>>>>>>> a98fd9f (fix)
           ))}
         </div>
       </div>
 
       <Separator />
 
+<<<<<<< HEAD
       {/* ── Move-in Date ─────────────────────────────────────────────── */}
       <div className="space-y-1.5 px-4 py-3">
         <Label
@@ -585,10 +574,17 @@ function FiltersForm({ draft, onChange, onApply, onClear: _onClear, immediate = 
           onChange={(e) => update({ moveInDate: e.target.value })}
           className="input-container flex h-8 w-full rounded-lg border bg-background px-3 py-1.5 text-xs outline-none"
         />
+=======
+      {/* Verified Only */}
+      <div className="flex items-center justify-between px-4 py-3">
+        <Label htmlFor="verified-only" className="cursor-pointer text-xs">Verified Only</Label>
+        <Switch id="verified-only" checked={draft.verifiedOnly} onCheckedChange={(checked) => update({ verifiedOnly: checked })} />
+>>>>>>> a98fd9f (fix)
       </div>
 
       <Separator />
 
+<<<<<<< HEAD
       {/* ── Verified Only ────────────────────────────────────────────── */}
       <div className="flex items-center justify-between px-4 py-3">
         <Label htmlFor="verified-only" className="cursor-pointer text-xs font-medium">
@@ -612,41 +608,40 @@ function FiltersForm({ draft, onChange, onApply, onClear: _onClear, immediate = 
           <span className="text-xs font-bold tabular-nums" style={{ color: "var(--trust)" }}>
             {draft.minTrustScore}/100
           </span>
+=======
+      {/* Trust Score */}
+      <div className="space-y-2 px-4 py-3">
+        <div className="flex items-center justify-between">
+          <Label className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">Trust Score</Label>
+          <span className="text-xs font-bold text-primary">{draft.minTrustScore}+</span>
+>>>>>>> a98fd9f (fix)
         </div>
-        <Slider
-          value={[draft.minTrustScore]}
-          min={0}
-          max={100}
-          step={10}
-          onValueChange={(v) => { const arr = Array.isArray(v) ? v : [v]; update({ minTrustScore: arr[0] }); }}
-          className="py-1"
-        />
+        <Slider value={[draft.minTrustScore]} min={0} max={100} step={10} onValueChange={(v) => { const a = Array.isArray(v) ? v : [v]; update({ minTrustScore: a[0] }); }} />
       </div>
 
       <Separator />
 
-      {/* ── Min Compatibility ────────────────────────────────────────── */}
+      {/* Compatibility */}
       <div className="space-y-2 px-4 py-3">
         <div className="flex items-center justify-between">
+<<<<<<< HEAD
           <Label className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
             Min Compatibility
           </Label>
           <span className="text-xs font-bold tabular-nums" style={{ color: "var(--ai)" }}>
             {draft.minCompatibility}%
           </span>
+=======
+          <Label className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">Compatibility</Label>
+          <span className="text-xs font-bold text-primary">{draft.minCompatibility}%+</span>
+>>>>>>> a98fd9f (fix)
         </div>
-        <Slider
-          value={[draft.minCompatibility]}
-          min={0}
-          max={100}
-          step={5}
-          onValueChange={(v) => { const arr = Array.isArray(v) ? v : [v]; update({ minCompatibility: arr[0] }); }}
-          className="py-1"
-        />
+        <Slider value={[draft.minCompatibility]} min={0} max={100} step={5} onValueChange={(v) => { const a = Array.isArray(v) ? v : [v]; update({ minCompatibility: a[0] }); }} />
       </div>
 
       <Separator />
 
+<<<<<<< HEAD
       {/* ── Sort By ──────────────────────────────────────────────────── */}
       <div className="space-y-1.5 px-4 py-3">
         <Label className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
@@ -656,11 +651,16 @@ function FiltersForm({ draft, onChange, onApply, onClear: _onClear, immediate = 
           <SelectTrigger className="input-container h-8 text-xs">
             <SelectValue />
           </SelectTrigger>
+=======
+      {/* Sort By */}
+      <div className="space-y-2 px-4 py-3">
+        <Label className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">Sort By</Label>
+        <Select value={draft.sortBy} onValueChange={(v) => update({ sortBy: v ?? "newest" })}>
+          <SelectTrigger className="h-8 text-xs"><SelectValue /></SelectTrigger>
+>>>>>>> a98fd9f (fix)
           <SelectContent>
             {SORT_OPTIONS.map((opt) => (
-              <SelectItem key={opt.value} value={opt.value}>
-                {opt.label}
-              </SelectItem>
+              <SelectItem key={opt.value} value={opt.value}>{opt.label}</SelectItem>
             ))}
           </SelectContent>
         </Select>
@@ -669,8 +669,9 @@ function FiltersForm({ draft, onChange, onApply, onClear: _onClear, immediate = 
   );
 }
 
-// ─── Exported component ───────────────────────────────────────────────────────
+// ─── Exported Component ───────────────────────────────────────────────────────
 
+<<<<<<< HEAD
 export function FiltersDrawer(props: FiltersDrawerProps) {
   const variant = props.variant ?? "roommate";
 
@@ -741,46 +742,55 @@ export function FiltersDrawer(props: FiltersDrawerProps) {
         immediate
       />
     );
+=======
+export function FiltersDrawer({ filters, onFiltersChange, onClearFilters }: FiltersDrawerProps) {
+  const [draft, setDraft] = useState<RoommateFilters>(filters);
+
+  // Sync when parent resets
+  const parentKey = JSON.stringify(filters);
+  const [lastKey, setLastKey] = useState(parentKey);
+  if (parentKey !== lastKey) { setDraft(filters); setLastKey(parentKey); }
+
+  const handleChange = (d: RoommateFilters) => { setDraft(d); onFiltersChange(d); };
+  const handleClear = () => { setDraft(DEFAULT_FILTERS); onClearFilters(); };
+>>>>>>> a98fd9f (fix)
 
   return (
     <>
-      {/* ── Mobile: bottom Sheet ─────────────────────────────────────── */}
+      {/* Mobile Sheet */}
       <div className="lg:hidden">
         <Sheet>
-          <SheetTrigger className="btn-secondary-motion group/button inline-flex shrink-0 items-center justify-center gap-2 w-full rounded-xl border border-border bg-background px-4 py-2 text-sm font-medium whitespace-nowrap transition-all hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50">
+          <SheetTrigger className="inline-flex items-center justify-center gap-2 w-full rounded-xl border border-border bg-background px-4 py-2 text-sm font-medium hover:bg-muted">
             <SlidersHorizontal className="h-4 w-4" />
             Filters &amp; Sort
           </SheetTrigger>
           <SheetContent side="left" className="w-full sm:max-w-md p-0 flex flex-col">
-            <SheetHeader className="px-5 py-4 border-b shrink-0">
-              <SheetTitle className="flex items-center gap-2">
+            <SheetHeader className="px-4 py-3 border-b shrink-0">
+              <SheetTitle className="flex items-center gap-2 text-sm">
                 <Filter className="h-4 w-4" />
-                Filters &amp; Sort
+                Filters
               </SheetTitle>
             </SheetHeader>
-
             <ScrollArea className="flex-1">
+<<<<<<< HEAD
               {mobileFormContent}
+=======
+              <FiltersForm draft={draft} onChange={handleChange} onClear={handleClear} />
+>>>>>>> a98fd9f (fix)
             </ScrollArea>
-
-            {/* sticky footer */}
-            <div className="shrink-0 border-t bg-card px-5 py-4 flex gap-3">
-              <Button
-                variant="outline"
-                className="btn-secondary-motion flex-1 rounded-xl text-sm font-medium"
-                onClick={handleClear}
-              >
-                <X className="h-3.5 w-3.5 mr-1.5" />
-                Clear All
+            <div className="shrink-0 border-t px-4 py-3">
+              <Button variant="outline" className="w-full rounded-xl text-xs" onClick={handleClear}>
+                <X className="h-3.5 w-3.5 mr-1.5" />Clear All
               </Button>
             </div>
           </SheetContent>
         </Sheet>
       </div>
 
-      {/* ── Desktop: sticky card sidebar ─────────────────────────────── */}
+      {/* Desktop Sidebar */}
       <div className="hidden lg:block">
         <div className="sticky top-20">
+<<<<<<< HEAD
           <div className="rounded-2xl border bg-card shadow-sm overflow-hidden flex flex-col h-[calc(100vh-88px)]">
             <div className="shrink-0 flex items-center justify-between px-4 py-3 border-b bg-card">
               <div className="flex items-center gap-2">
@@ -796,9 +806,20 @@ export function FiltersDrawer(props: FiltersDrawerProps) {
                 <X className="h-3 w-3" />
                 Clear All
               </button>
+=======
+          <div className="rounded-2xl border bg-card shadow-sm overflow-hidden flex flex-col max-h-[calc(100vh-120px)]">
+            <div className="shrink-0 flex items-center justify-between px-4 py-3 border-b bg-muted/30">
+              <div className="flex items-center gap-2">
+                <div className="flex h-6 w-6 items-center justify-center rounded-md bg-primary/10">
+                  <SlidersHorizontal className="h-3.5 w-3.5 text-primary" />
+                </div>
+                <h3 className="font-semibold text-sm">Filters</h3>
+              </div>
+              <button onClick={handleClear} className="text-xs text-primary hover:underline font-medium">Reset</button>
+>>>>>>> a98fd9f (fix)
             </div>
-
             <ScrollArea className="flex-1 min-h-0">
+<<<<<<< HEAD
               {formContent}
               <div className="h-2" />
             </ScrollArea>
@@ -812,6 +833,10 @@ export function FiltersDrawer(props: FiltersDrawerProps) {
                 Apply Filters
               </Button>
             </div>
+=======
+              <FiltersForm draft={draft} onChange={handleChange} onClear={handleClear} />
+            </ScrollArea>
+>>>>>>> a98fd9f (fix)
           </div>
         </div>
       </div>
