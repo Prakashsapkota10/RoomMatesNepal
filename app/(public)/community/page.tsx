@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import { CommunityQueryProvider } from "./components/query-provider";
-import { CommunityContent } from "./components/community-content";
+import { CommunityPageContent } from "./community-page-content";
 
 export const metadata: Metadata = {
   title: "Community Hub",
@@ -9,9 +8,5 @@ export const metadata: Metadata = {
 };
 
 export default function CommunityPage() {
-  return (
-    <CommunityQueryProvider>
-      <CommunityContent />
-    </CommunityQueryProvider>
-  );
+  return <CommunityPageContent />;
 }
