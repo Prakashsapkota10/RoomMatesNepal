@@ -38,7 +38,7 @@ export default async function AdminLayout({
         />
 
         <SidebarInset className="flex flex-1 flex-col min-w-0">
-          <DashboardTopbar showSearch={false} />
+          <DashboardTopbar userName={admin.name} userAvatar={admin.avatar} />
           <main className="flex-1 overflow-auto p-4 lg:p-6">
             {children}
           </main>

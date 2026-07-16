@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { buildMeta } from "@/lib/metadata";
+import { MessagesClient } from "./components/messages-client";
 
 export const metadata: Metadata = buildMeta({
   title: "Messages",
@@ -7,10 +8,5 @@ export const metadata: Metadata = buildMeta({
 });
 
 export default function MessagesPage() {
-  return (
-    <div>
-      <h1 className="text-2xl font-bold">Messages</h1>
-      <p className="text-muted-foreground">Your conversations will appear here.</p>
-    </div>
-  );
+  return <MessagesClient />;
 }

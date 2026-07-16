@@ -117,7 +117,8 @@ export const SIDEBAR_NAV: SidebarNavItem[] = [
     icon: "ClipboardList",
     permission: "manage_requirements",
     children: [
-      { label: "My Requirements", href: "/activities", icon: "FileText" },
+      { label: "My Listings", href: "/activities", icon: "Home" },
+      { label: "My Requirements", href: "/activities?tab=requirements", icon: "FileText" },
       { label: "Drafts", href: "/activities?tab=drafts", icon: "PenLine" },
       { label: "Archived", href: "/activities?tab=archived", icon: "Archive" },
     ],

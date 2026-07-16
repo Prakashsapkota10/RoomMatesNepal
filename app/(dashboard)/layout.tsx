@@ -44,7 +44,10 @@ export default async function DashboardLayout({
 
         <SidebarInset className="flex flex-1 flex-col min-w-0">
           <DashboardTopbar
+            userName={user.name}
+            userAvatar={user.avatar}
             unreadNotifications={user.unreadNotifications}
+            unreadMessages={user.unreadMessages}
           />
           <main className="flex-1 overflow-auto p-4 lg:p-6">
             {children}
