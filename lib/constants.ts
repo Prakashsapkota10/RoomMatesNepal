@@ -211,6 +211,21 @@ export const ADMIN_SIDEBAR_NAV: NavItem[] = [
     icon: "Flag",
   },
   {
+    label: "Community",
+    href: "/admin/community",
+    icon: "MessageSquare",
+  },
+  {
+    label: "Analytics",
+    href: "/admin/analytics",
+    icon: "BarChart3",
+  },
+  {
+    label: "Announcements",
+    href: "/admin/announcements",
+    icon: "Megaphone",
+  },
+  {
     label: "Verifications",
     href: "/admin/verifications",
     icon: "ShieldCheck",
