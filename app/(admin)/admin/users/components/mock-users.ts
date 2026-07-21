@@ -1,0 +1,81 @@
+import type { AdminUserRow } from "./types";
+
+/**
+ * Mock admin user list — mirrors the reference design's sample rows plus a
+ * few extras for filter/pagination testing.
+ * TODO: Replace with: await db.user.findMany({ ...pagination, ...filters })
+ */
+export const MOCK_ADMIN_USERS: AdminUserRow[] = [
+  {
+    id: "1",
+    displayId: "RM-1029",
+    name: "Anish Karki",
+    email: "anish.k@example.com",
+    phone: "+977 9801234567",
+    city: "Kathmandu",
+    role: "user",
+    trustScore: 92,
+    verification: "verified",
+    status: "active",
+  },
+  {
+    id: "2",
+    displayId: "RM-1030",
+    name: "Priya Sharma",
+    email: "priya.s@domain.com",
+    phone: "+977 9841987654",
+    city: "Lalitpur",
+    role: "tenant",
+    trustScore: 45,
+    verification: "pending",
+    status: "inactive",
+  },
+  {
+    id: "3",
+    displayId: "RM-1045",
+    name: "Rajesh Gurung",
+    email: "rajesh.g@nepal.np",
+    phone: "+977 9812345678",
+    city: "Pokhara",
+    role: "user",
+    trustScore: 12,
+    verification: "rejected",
+    status: "suspended",
+  },
+  {
+    id: "4",
+    displayId: "RM-1052",
+    name: "Sunita Thapa",
+    email: "sunita.t@example.com",
+    phone: "+977 9860112233",
+    city: "Bhaktapur",
+    role: "tenant",
+    trustScore: 78,
+    verification: "verified",
+    status: "active",
+  },
+  {
+    id: "5",
+    displayId: "RM-1061",
+    name: "Bikash Shrestha",
+    email: "bikash.s@domain.com",
+    phone: "+977 9807654321",
+    city: "Kathmandu",
+    role: "user",
+    trustScore: 65,
+    verification: "verified",
+    status: "active",
+  },
+  {
+    id: "6",
+    displayId: "RM-1072",
+    name: "Sabina Rai",
+    email: "sabina.r@example.com",
+    phone: "+977 9845566778",
+    city: "Lalitpur",
+    role: "admin",
+    trustScore: 88,
+    verification: "verified",
+    status: "active",
+  },
+];

@@ -1,16 +1,17 @@
 import type { Metadata } from "next";
 import { buildMeta } from "@/lib/metadata";
+import { verifyRole } from "@/lib/auth";
+import { UsersClient } from "./components/users-client";
 
 export const metadata: Metadata = buildMeta({
-  title: "Manage Users",
+  title: "User Management",
   noIndex: true,
 });
 
-export default function AdminUsersPage() {
-  return (
-    <div>
-      <h1 className="text-2xl font-bold">Manage Users</h1>
-      <p className="text-muted-foreground">View, suspend, and manage user accounts.</p>
-    </div>
-  );
+export default async function AdminUsersPage() {
+  // Route already gated by app/(admin)/layout.tsx — verifyRole is a defense-in-depth
+  // check at the page level in case this page is ever reached via a different layout.
+  await verifyRole("admin");
+
+  return <UsersClient />;
 }
