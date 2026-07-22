@@ -1,16 +1,17 @@
 import type { Metadata } from "next";
 import { buildMeta } from "@/lib/metadata";
+import { verifyRole } from "@/lib/auth";
+import { CommunityClient } from "./components/community-client";
 
 export const metadata: Metadata = buildMeta({
   title: "Community Management",
   noIndex: true,
 });
 
-export default function AdminCommunityPage() {
-  return (
-    <div>
-      <h1 className="text-2xl font-bold">Community Management</h1>
-      <p className="text-muted-foreground">Manage questions, discussions, and community posts.</p>
-    </div>
-  );
+export default async function AdminCommunityPage() {
+  // Route already gated by app/(admin)/layout.tsx — verifyRole is a defense-in-depth
+  // check at the page level in case this page is ever reached via a different layout.
+  await verifyRole("admin");
+
+  return <CommunityClient />;
 }

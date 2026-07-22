@@ -1,16 +1,17 @@
 import type { Metadata } from "next";
 import { buildMeta } from "@/lib/metadata";
+import { verifyRole } from "@/lib/auth";
+import { ReportsClient } from "./components/reports-client";
 
 export const metadata: Metadata = buildMeta({
-  title: "Reports",
+  title: "Report Management",
   noIndex: true,
 });
 
-export default function AdminReportsPage() {
-  return (
-    <div>
-      <h1 className="text-2xl font-bold">Reports</h1>
-      <p className="text-muted-foreground">Review user-submitted reports and flags.</p>
-    </div>
-  );
+export default async function AdminReportsPage() {
+  // Route already gated by app/(admin)/layout.tsx — verifyRole is a defense-in-depth
+  // check at the page level in case this page is ever reached via a different layout.
+  await verifyRole("admin");
+
+  return <ReportsClient />;
 }

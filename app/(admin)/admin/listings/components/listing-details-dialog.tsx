@@ -42,8 +42,8 @@ export function ListingDetailsDialog({ listing, onOpenChange }: ListingDetailsDi
 
   return (
     <Dialog open={!!listing} onOpenChange={(open) => { if (!open) { setActiveImage(0); onOpenChange(false); } }}>
-      <DialogContent className="sm:max-w-md p-0 gap-0 max-h-[85vh] overflow-hidden flex flex-col">
-        <DialogHeader className="px-4 pt-4 pb-2 flex-row items-center justify-between gap-2">
+      <DialogContent className="sm:max-w-md p-0 gap-0 h-[88vh] max-h-[820px] overflow-hidden flex flex-col">
+        <DialogHeader className="px-4 pt-4 pb-2 flex-row items-center justify-between gap-2 shrink-0">
           <DialogTitle>Listing Details</DialogTitle>
         </DialogHeader>
 
@@ -134,7 +134,7 @@ export function ListingDetailsDialog({ listing, onOpenChange }: ListingDetailsDi
         </div>
 
         {/* Approve / Reject actions */}
-        <div className="flex items-center gap-2 p-4 border-t bg-muted/30">
+        <div className="flex items-center gap-2 p-4 border-t bg-muted/30 shrink-0">
           <Button
             className="flex-1 btn-primary-motion gap-1.5 font-semibold"
             disabled={isApproved}
