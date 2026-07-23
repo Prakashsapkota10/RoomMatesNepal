@@ -31,10 +31,11 @@ const ICON_COLOR: Record<ToastVariant, string> = {
 };
 
 /**
- * Lightweight, self-contained toast provider scoped to the admin Settings
- * page. The project has no global toast system yet, so this stays local to
- * this feature rather than touching app/layout.tsx or introducing a
- * dependency like sonner. Reuses existing design tokens for styling.
+ * Lightweight, self-contained toast provider shared across admin feature
+ * pages (Settings, Payments, ...). The project has no global toast system
+ * yet, so this stays scoped to admin pages that opt in rather than touching
+ * app/layout.tsx or introducing a dependency like sonner. Reuses existing
+ * design tokens for styling.
  */
 export function ToastProvider({ children }: { children: React.ReactNode }) {
   const [toasts, setToasts] = useState<ToastItem[]>([]);

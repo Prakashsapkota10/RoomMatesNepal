@@ -24,7 +24,7 @@ import {
   AlertDialogCancel,
 } from "@/components/ui/alert-dialog";
 import { RoleEditorDialog } from "./role-editor-dialog";
-import { useToast } from "./toast-provider";
+import { useToast } from "@/components/admin/toast-provider";
 import type { AdminRole } from "./types";
 
 interface RolesAccessCardProps {

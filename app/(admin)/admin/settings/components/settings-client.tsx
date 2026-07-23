@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { ToastProvider } from "./toast-provider";
+import { ToastProvider } from "@/components/admin/toast-provider";
 import { usePlatformSettings } from "./use-platform-settings";
 import { useUnsavedChangesWarning } from "./use-unsaved-changes-warning";
 import { SettingsSearchBar, getMatchingSectionKeys } from "./settings-search-bar";
@@ -111,7 +111,7 @@ function SettingsClientInner() {
   );
 }
 
-/** Wraps the settings page in its own local ToastProvider (see toast-provider.tsx for why). */
+/** Wraps the settings page in its own local ToastProvider (see components/admin/toast-provider.tsx for why). */
 export function SettingsClient() {
   return (
     <ToastProvider>

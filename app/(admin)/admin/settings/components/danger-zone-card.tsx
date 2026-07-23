@@ -6,7 +6,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { DeleteTestDataDialog } from "./delete-test-data-dialog";
 import { ResetPlatformDialog } from "./reset-platform-dialog";
-import { useToast } from "./toast-provider";
+import { useToast } from "@/components/admin/toast-provider";
 
 /**
  * Danger Zone card — visually distinct red-tinted card for irreversible

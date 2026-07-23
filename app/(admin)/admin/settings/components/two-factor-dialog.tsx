@@ -21,7 +21,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
-import { useToast } from "./toast-provider";
+import { useToast } from "@/components/admin/toast-provider";
 import type { PlatformSettings } from "./types";
 
 interface TwoFactorDialogProps {

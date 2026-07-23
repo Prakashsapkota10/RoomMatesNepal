@@ -11,7 +11,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
 import { Label } from "@/components/ui/label";
-import { useToast } from "./toast-provider";
+import { useToast } from "@/components/admin/toast-provider";
 import type { TrustScoreWeights } from "./types";
 
 interface TrustScoreDialogProps {

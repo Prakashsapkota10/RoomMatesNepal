@@ -14,7 +14,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { TIMEZONE_OPTIONS } from "./constants";
-import { useToast } from "./toast-provider";
+import { useToast } from "@/components/admin/toast-provider";
 import type { PlatformSettings, SystemTimezone } from "./types";
 
 interface GeneralConfigCardProps {

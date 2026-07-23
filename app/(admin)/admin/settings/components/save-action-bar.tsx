@@ -12,7 +12,7 @@ import {
   AlertDialogAction,
   AlertDialogCancel,
 } from "@/components/ui/alert-dialog";
-import { useToast } from "./toast-provider";
+import { useToast } from "@/components/admin/toast-provider";
 
 interface SaveActionBarProps {
   hasUnsavedChanges: boolean;

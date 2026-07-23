@@ -16,7 +16,7 @@ import {
   AlertDialogAction,
   AlertDialogCancel,
 } from "@/components/ui/alert-dialog";
-import { useToast } from "./toast-provider";
+import { useToast } from "@/components/admin/toast-provider";
 import type { PlatformSettings } from "./types";
 
 interface MaintenanceCardProps {
