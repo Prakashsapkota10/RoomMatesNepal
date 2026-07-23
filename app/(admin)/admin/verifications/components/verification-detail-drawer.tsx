@@ -180,10 +180,12 @@ export function VerificationDetailDrawer({
                 verification.status === "needs_attention") && (
                 <Button
                   variant="outline"
-                  className="flex-1 btn-secondary-motion gap-1.5 font-medium min-w-[calc(50%-0.25rem)]"
+                  className="flex-1 btn-secondary-motion gap-1.5 font-medium min-w-[calc(50%-0.25rem)] h-auto py-2 whitespace-normal text-center leading-snug"
                   onClick={() => onRequestAdditional(verification)}
                 >
-                  Request Additional Verification
+                  Request Additional
+                  <br />
+                  Verification
                 </Button>
               )}
               {(verification.status === "pending" ||
